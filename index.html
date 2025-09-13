@@ -1,0 +1,2289 @@
+<!-- LINK URL: https://preview--breezy-digital-persona.lovable.app/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoi Mai</title>
+    <style>
+                * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: white;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .modal-overlay {
+            backdrop-filter: blur(4px);
+        }
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d97706;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d97706;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #d97706;
+            margin-bottom: 20px;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: #d97706;
+            margin: 0 auto 60px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #fef3c7 0%, white 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            padding-right: 40px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-circle {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.3);
+            overflow: hidden;
+            border: 8px solid white;
+        }
+
+        .crown-icon {
+            width: 120px;
+            height: 120px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .hero .description {
+            font-size: 18px;
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        /* Certificates Section */
+        .certificates {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .certificate-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #d97706;
+        }
+
+        .certificate-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .certificate-icon svg {
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+
+        .certificate-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .certificate-issuer {
+            font-size: 16px;
+            color: #d97706;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .certificate-date {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .certificate-description {
+            font-size: 16px;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .certificate-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .certificate-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d97706;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .certificate-link:hover {
+            color: #92400e;
+        }
+
+        .certificate-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Image containers with fixed aspect ratios */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d97706;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d97706;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #d97706;
+            margin-bottom: 20px;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: #d97706;
+            margin: 0 auto 60px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #fef3c7 0%, white 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            padding-right: 40px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-circle {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.3);
+            overflow: hidden;
+            border: 8px solid white;
+
+        }
+
+        .crown-icon {
+            width: 120px;
+            height: 120px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .hero .description {
+            font-size: 18px;
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        /* Image containers with fixed aspect ratios */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Section layouts */
+        .section-content {
+            display: grid;
+            grid-template-columns: 30fr 70fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .section-content.reverse {
+            grid-template-columns: 70fr 30fr;
+        }
+
+        .section-text h3 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .section-text p {
+            font-size: 18px;
+            color: #6b7280;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Achievement cards */
+        .achievements {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .achievement-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: #f9fafb;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .achievement-content h4 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .achievement-content p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            height: 400px;
+        }
+
+        .carousel-container {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 40px 30px 30px;
+            color: white;
+        }
+
+        .carousel-overlay h4 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .carousel-overlay p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #d97706;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .project-content p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .learn-more {
+            color: #d97706;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-image {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-body h3 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            color: #6b7280;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            color: #6b7280;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .features-list li:before {
+            content: "•";
+            color: #d97706;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .tech-tag {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary {
+            background: #d97706;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b45309;
+        }
+
+        .btn-secondary {
+            background: #1f2937;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #374151;
+        }
+
+        /* Community Images Grid */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .community-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .community-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s;
+        }
+
+        .community-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .community-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            transition: background 0.3s;
+        }
+
+        .community-image:hover .community-overlay {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .community-overlay p {
+            color: white;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f9fafb;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d97706;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #d97706;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b45309;
+        }
+
+        .form-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            color: #1e40af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content,
+            .section-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-content.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                <img src="./pictures/profile.jpg" 
+                    alt="Profile" 
+                    class="w-8 h-8 rounded-full object-cover">
+
+                    Khoi Mai
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chess">Chess</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#community">Community</a></li>
+                    <li><a href="#certificates">Certificates & Achievements</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Chess pattern background -->
+    <section class="h-screen flex items-center justify-center relative z-10 mt-16">
+        <div class="w-full h-full bg-white border-8 border-orange-600 shadow-2xl relative overflow-hidden">
+            <!-- Chess piece decorations -->
+
+            
+            <div class="grid md:grid-cols-2 gap-0 h-full">
+                <!-- Left Column - Profile Image -->
+                <div class="flex items-center justify-center p-12 bg-gradient-to-br from-orange-50 to-orange-100">
+                    <div class="relative">
+                        <!-- Profile Image Placeholder -->
+                        <div class="w-72 h-72 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-2xl">
+                        <div class="w-72 h-72 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-2xl overflow-hidden">
+                            <img src="./pictures/profile2.jpg" alt="My Avatar" class="w-full h-full object-cover rounded-full">
+                        </div>
+
+                        </div>
+                        <!-- Decorative ring -->
+                        <div class="absolute inset-0 rounded-full border-4 border-white shadow-lg"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Information -->
+                <div class="flex flex-col justify-center p-12 space-y-8">
+                    <!-- Name -->
+                    <div>
+<h1 class="text-4xl text-gray-900 mb-2" style="font-family: 'Dancing Script', cursive;">
+  Mai Hoang Khoi
+</h1>
+                        <div class="w-16 h-1 bg-orange-500 rounded-full"></div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="space-y-4">
+                        <p class="text-xl text-gray-600 leading-relaxed">
+I am a high school student at VNU-HCM High School for the Gifted. I passionate about Computer Science, Chess, and Mathematics.</p>
+                        <p class="text-lg text-gray-500">
+Beyond academics, I value community work, supporting others through trips while fostering empathy and teamwork.</p>
+                    </div>
+
+                    <!-- Skills & Traits -->
+<div class="space-y-6">
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">Skills</h3>
+
+  <!-- Skills Grid -->
+  <div class="grid grid-cols-2 gap-6">
+
+    <!-- Python -->
+    <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500 hover:bg-orange-100 transition-colors">
+      <div class="flex items-center space-x-3 mb-2">
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+          <i class="devicon-python-plain text-white text-lg"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">Python</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2">
+        <div class="bg-orange-500 h-2 rounded-full" style="width: 65%;"></div>
+      </div>
+    </div>
+
+    <!-- HTML & CSS -->
+    <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500 hover:bg-orange-100 transition-colors">
+      <div class="flex items-center space-x-3 mb-2">
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+          <i class="devicon-html5-plain text-white text-lg"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">HTML & CSS</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2">
+        <div class="bg-orange-500 h-2 rounded-full" style="width: 80%;"></div>
+      </div>
+    </div>
+
+    <!-- n8n -->
+
+<div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500 hover:bg-orange-100 transition-colors">
+  <div class="flex items-center space-x-3 mb-2">
+    <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+        <img src="./pictures/n8n.png" alt="n8n" class="w-4 h-4">
+    </div>
+    <span class="text-sm font-medium text-gray-700">n8n</span>
+  </div>
+  <div class="w-full bg-gray-200 rounded-full h-2">
+    <div class="bg-orange-500 h-2 rounded-full" style="width: 50%;"></div>
+  </div>
+</div>
+
+
+    <!-- Django -->
+    <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500 hover:bg-orange-100 transition-colors">
+      <div class="flex items-center space-x-3 mb-2">
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+          <i class="devicon-django-plain text-white text-lg"></i>
+        </div>
+        <span class="text-sm font-medium text-gray-700">Django</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2">
+        <div class="bg-orange-500 h-2 rounded-full" style="width: 30%;"></div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ad5b9fe1ef045d',t:'MTc1NzE1NTMyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <!-- Chess Section -->
+    <section id="chess" class="section">
+
+        <div class="container">
+<!-- Goal Section -->
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Chess Journey</h2>
+  
+  <!-- Divider -->
+  <div class="w-24 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+  
+  <!-- Quote -->
+  <p class="text-lg italic text-gray-700 leading-relaxed max-w-3xl mx-auto">
+"Chess has been more than a game—it has been a journey of growth, leadership, and community. From guiding almost members at Chess Nang Khieu to competing in tournaments, it has taught me the value of strategy, resilience, and inspiring others to succeed together."
+  </p>
+</section>
+
+            
+            <div class="section-content">
+                    <div class="achievements">
+                        <div class="achievement-card">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="achievement-icon" style="color: orange;" viewBox="0 0 24 24">
+                            <path d="M5 8l2 12h10l2-12-5 3-2-5-2 5-5-3z" />
+                            </svg>
+
+                            <div class="achievement-content">
+                            <h4>President, Chess Nang Khieu Club</h4>
+                            <p>Guiding almost members through tournaments, training, and community activities.</p>
+                            </div>
+                        </div>
+                        <div class="achievement-card">
+                            <svg class="achievement-icon" style="color: yellow;" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <div class="achievement-content">
+                                <h4>Competitive Chess Participation</h4>
+                                <p>Engaged in various chess tournaments, from school contests to citywide events</p>
+                            </div>
+                        </div>
+                    </div>
+                <div class="carousel" id="chessCarousel">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="./pictures/chess0.png" alt="Strategic Analysis">
+                            <div class="carousel-overlay">
+                                <h4>Where Challenges Begin</h4>
+                                <p>The Chessboards: A Battlefield of Ideas, Resilience, and Creativity</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess.jpg" alt="Strategic Analysis">
+                            <div class="carousel-overlay">
+                                <h4>Our Growing Chess Family</h4>
+                                <p>Our First Memorable Chess Photos</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess1.jpg" alt="Strategic Analysis">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>Our Chess Board Leaders</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess2.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>The Founding Leaders</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess3.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>My Team for the Year</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess4.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>Small Teaching Session</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess5.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>Myself Presenting</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess6.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>First Bonding</h4>
+                                <p>A little break...</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess7.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>School's Orientation day</h4>
+                                <p>Students Gathering</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess8.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Medals and Trophies</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess9.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Trophies and delighting Background</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess10.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Venue Scene</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess11.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Beautiful hand-made gifts for contestants</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess12.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Christmas Open Tournament</h4>
+                                <p>Staff Photos</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess13.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Christmas Open Tournament</h4>
+                                <p>Smiles from Our Staffs</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess14.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>The Club’s Signature Red Uniform</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess15.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Happy Moments</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess16.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Moments I wish we could come back...</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess17.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Myself Working...</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess18.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Rookie Tournament</h4>
+                                <p>Giving out gifts</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess19.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Last Photos</h4>
+                                <p>My Close Brothers</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess20.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Last bonding</h4>
+                                <p>Small Chess Session</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/chess21.jpg" alt="Chess">
+                            <div class="carousel-overlay">
+                                <h4>Last Bonding</h4>
+                                <p>Tense moment during chess match</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav prev" onclick="changeSlide('chessCarousel', -1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-nav next" onclick="changeSlide('chessCarousel', 1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section" style="background: #f9fafb;">
+        <div class="container">
+<!-- Goal Section -->
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Personal Projects</h2>
+  
+  <!-- Divider -->
+  <div class="w-12 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+  
+  <!-- Quote -->
+  <p class="text-lg italic text-gray-700 leading-relaxed max-w-3xl mx-auto">
+"Driven by curiosity and creativity, I enjoy turning ideas into interactive projects that blend logic with innovation."  </p>
+            
+            <div class="projects-grid">
+                <div class="project-card" onclick="openModal('project1')">
+                    <div class="project-image">
+                        <img src="./pictures/app1.png" alt="Fun Quiz Game">
+                    </div>
+                    <div class="project-content">
+                        <h3>Fun Quiz Game</h3>
+                        <p>AI-powered quiz app that generates dynamic questions for fun learning.</p>
+                        <a href="#" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card" onclick="openModal('project2')">
+                    <div class="project-image">
+                        <img src="./pictures/app2.png" alt="Excuse AI Bot">
+                    </div>
+                    <div class="project-content">
+                        <h3>Excuse AI Bot</h3>
+                        <p>Creative AI app that generates fun and clever excuses on demand.</p>
+                        <a href="#" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card" onclick="openModal('project3')">
+                    <div class="project-image">
+                        <img src="./pictures/app3.png" alt="SAT Revision App">
+                    </div>
+                    <div class="project-content">
+                        <h3>SAT Revision App</h3>
+                        <p>Smart SAT quiz builder for focused practice and real-time feedback.</p>
+                        <a href="#" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section">
+        <div class="container">
+<!-- Goal Section -->
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Community Involvement</h2>
+  
+  <!-- Divider -->
+  <div class="w-96 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+  
+  <!-- Quote -->
+  <p class="text-lg italic text-gray-700 leading-relaxed max-w-3xl mx-auto">
+"Community work has taught me that even small actions can create lasting impact. From bringing chess and joy to orphans to supporting children through charity trips, I have learned the value of empathy, teamwork, and giving back to inspire hope beyond the board."  </p>
+</section>
+            
+            <div class="section-content reverse">
+                <div class="carousel" id="communityCarousel">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="./pictures/go1.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Charity Trip</h4>
+                                <p>
+                                    Discovering the Monkey Island
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go2.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Charity Trip</h4>
+                                <p>
+Community Service in Action                                  
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go3.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Charity Trip</h4>
+                                <p>
+                                    Almost there...
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go4.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Charity Trip</h4>
+                                <p>
+                                    Unpacking Supplies for Children
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go5.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Charity Trip</h4>
+                                <p>
+                                    Learning the Cane Weaving Tradition
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go6.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Outdoor Bonding Moments</h4>
+                                <p>
+                                    Packing Presents for the Children
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go7.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Outdoor Bonding Moments</h4>
+                                <p>
+                                    The Children' Smiles when Receiving Gifts
+                                </p>
+                            </div>
+                        </div>  
+                        <div class="carousel-slide">
+                            <img src="./pictures/go8.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Outdoor Bonding Moments</h4>
+                                <p>
+                                    Giving out Gifts to Game Winners
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go9.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning Experiences</h4>
+                                <p>
+Learning yet another tradition                   
+                                </p>
+                            </div>
+                        </div>  
+                        <div class="carousel-slide">
+                            <img src="./pictures/go10.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning Experiences</h4>
+                                <p>
+                                    Welcome by the Locals
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go11.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning and Creativity</h4>
+                                <p>
+Encouraging Children through games, art, and hands-on learning.
+                                </p>
+                            </div>
+                        </div> 
+                        <div class="carousel-slide">
+                            <img src="./pictures/go13.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning and Creativity</h4>
+                                <p>
+                                    Noisy Interactive Moments with the Children
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go14.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning and Creativity</h4>
+                                <p>
+                                    Sharing laughter, care, and meaningful moments with the children.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go15.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning and Creativity</h4>
+                                <p>
+                                    Sharing Joy
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go16.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Learning and Creativity</h4>
+                                <p>
+Enjoyable moments with the Children
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go17.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Meals and Conversations</h4>
+                                <p>
+Finals snacks for the good boys
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go18.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Celebrating Together</h4>
+                                <p>
+Final touches of the project
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go19.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Celebrating Together</h4>
+                                <p>
+Gathering as one big family to wrap up meaningful experiences.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go30.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+                                    Focused Classroom Chess Session
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go29.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+                                    Learning with the Chess Board
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go31.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p> 
+                                    Interactive Teaching in Progress
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go20.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Joyful Games with the Children
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go21.jpg" alt="Charity Trip">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Circle Time, Stories, and Fun
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go22.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Creative Teamwork in Action
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go23.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Bonding through Play and Smiles
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go24.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Community Support in Action
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go25.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Resting, Sharing, and Friendship
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go26.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Behind-the-Scenes Team Moment
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go27.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Group Photo Full of Spirit
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./pictures/go28.jpg" alt="Chessing is Caring">
+                            <div class="carousel-overlay">
+                                <h4>Chessing is Caring</h4>
+                                <p>
+Closing Smiles, lasting Memories
+                                </p>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                    <button class="carousel-nav prev" onclick="changeSlide('communityCarousel', -1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-nav next" onclick="changeSlide('communityCarousel', 1)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="section-text">
+                    <div class="achievements">
+                        <div class="achievement-card">
+                            <svg class="achievement-icon" style="color: #00ff1aff;" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <div class="achievement-content">
+                            <h4>Chessing is Caring</h4>
+                            <p>CNK Chess Club and TDN Chess collaborated to bring chess and joy to orphans, helping them find passion and fun beyond the board.</p>
+
+                            </div>
+                        </div>
+                        <div class="achievement-card">
+                            <svg class="achievement-icon" style="color: blue;" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <div class="achievement-content">
+<h4>Charity Boat Trip</h4>
+<p>Participated in a boat trip to remote areas to bring snacks, gifts, and joy to children, creating smiles and meaningful memories.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates">
+        <div class="container">
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Certificates & Achievements</h2>
+  
+  <!-- Divider -->
+  <div class="w-48 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+            <div class="certificates-grid">
+                <!-- Certificate 1 -->
+<div class="certificate-card">
+    <div class="certificate-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V9M19 9H14V4H5V19H19V9Z"/>
+        </svg>
+    </div>
+    <h3 class="certificate-title">Math Olympiad & AI Training Program</h3>
+    <p class="certificate-issuer">xAI & VNU-HCM High School for the Gifted</p>
+    <p class="certificate-date">Issued: January 2025</p>
+    <p class="certificate-description">
+        Contributed to the development of AI training datasets by translating and coding 100 advanced math problems into English using Overleaf, earning $200 in recognition of accuracy, responsibility, and teamwork.
+    </p>
+    <span class="skill-tag">AI Training</span>
+    <span class="skill-tag">Overleaf</span>
+    <span class="skill-tag">Translation</span>
+</div>
+
+
+                <!-- Certificate 2 -->
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V9M19 9H14V4H5V19H19V9Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="certificate-title">Problem Solving (Intermediate) Certificate</h3>
+                    <p class="certificate-issuer">HackerRank</p>
+                    <p class="certificate-date">Issued: July 2025</p>
+                    <p class="certificate-description">
+Proficiency in algorithmic problem-solving, data structures, and coding challenges with intermediate-level complexity.                   
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Optimization</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                    <!-- Trophy Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="Silver">
+                    <path d="M20 3h-3V2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v1H4a1 1 0 0 0-1 1v3c0 2.21 1.79 4 4 4h.18A6.99 6.99 0 0 0 11 14.93V18H9v2h6v-2h-2v-3.07A6.99 6.99 0 0 0 16.82 11H17c2.21 0 4-1.79 4-4V4a1 1 0 0 0-1-1zM6 9c-1.1 0-2-.9-2-2V5h2v4zm12 0h-2V5h2v2c0 1.1-.9 2-2 2z"/>
+                    </svg>
+                    </div>
+                    <h3 class="certificate-title">Silver Award – HKIMO</h3>
+                    <p class="certificate-issuer">Hong Kong International Mathematical Olympiad (HKIMO)</p>
+                    <p class="certificate-date">Issued: June 2025</p>
+                    <p class="certificate-description">
+Achieved Silver Award in the Senior Secondary Group for outstanding performance in international math competition.</p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Advanced Mathematics</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Competition Excellence</span>
+                        </div>
+                </div>
+
+                <!-- Certificate 4 -->
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                    <!-- Trophy Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="yellow">
+                    <path d="M20 3h-3V2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v1H4a1 1 0 0 0-1 1v3c0 2.21 1.79 4 4 4h.18A6.99 6.99 0 0 0 11 14.93V18H9v2h6v-2h-2v-3.07A6.99 6.99 0 0 0 16.82 11H17c2.21 0 4-1.79 4-4V4a1 1 0 0 0-1-1zM6 9c-1.1 0-2-.9-2-2V5h2v4zm12 0h-2V5h2v2c0 1.1-.9 2-2 2z"/>
+                    </svg>
+                    </div>
+                    <h3 class="certificate-title">Gold Medal - CIMO</h3>
+                    <p class="certificate-issuer">Copernicus International Mathematical Olympiad (CIMO)</p>
+                    <p class="certificate-date">Issued: February 2025</p>
+                    <p class="certificate-description">
+With one of the highest scores achieved, this accomplishment highlights exceptional mathematical skills, problem-solving ability, and dedication to excellence.                    </p>
+                    <div class="certificate-skills"> 
+                        <span class="skill-tag">Mathematical Problem Solving</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Competition Excellence</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="certificate-title">Pathway Program Internship</h3>
+                    <p class="certificate-issuer">Le Quang Tuan (Education Director)</p>
+                    <p class="certificate-date">Issued: July 2025</p>
+                    <p class="certificate-description">
+This internship project focuses on exploring innovative approaches to integrate automation and AI technologies into educational content creation, with the goal of enhancing efficiency, personalization, and accessibility in learning resources.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Artificial Intelligence</span>
+                        <span class="skill-tag">Automation</span>
+                        <span class="skill-tag">Innovation</span>
+                        <span class="skill-tag">Educational Technology</span>
+                        <span class="skill-tag">Critical Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-card">
+                    <div class="certificate-icon">
+<!-- Star Icon (for excellence) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="yellow">
+  <path d="M12 2l2.39 6.96H22l-5.2 3.77 1.99 6.9L12 15.77 5.21 19.63l1.99-6.9L2 8.96h7.61L12 2z"/>
+</svg>
+                    </div>
+                    <h3 class="certificate-title">Ho Chi Minh City Grade 9 Excellent Student Contest – Mathematics, Second Prize</h3>
+                    <p class="certificate-issuer">Ho Chi Minh City Department of Education and Training</p>
+                    <p class="certificate-date">Issued: August 2022</p>
+                    <p class="certificate-description">
+This award recognizes exceptional mathematical ability, problem-solving skills, and dedication to academic excellence for outstanding performance
+</p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Mathematical Problem Solving</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Competition Excellence</span>
+                        <span class="skill-tag">Time Management under Pressure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section" style="background: #f9fafb;">
+        <div class="container">
+<!-- Goal Section -->
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Contact</h2>
+  
+  <!-- Divider -->
+  <div class="w-24 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+            
+            <form class="contact-form" onsubmit="submitForm(event)">
+                <div class="form-info">
+                    <strong>📧 Functional Contact Form</strong><br>
+                    This form is powered by n8n automation and  
+                    your message will be processed automatically and you'll receive a response via email within a few days.
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Inquiry Type</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="chess">Chess Related</option>
+                        <option value="work">Work Opportunity</option>
+                        <option value="personal">Personal Question</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your inquiry..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Project Modals -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="">
+                <button class="modal-close" onclick="closeModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <h4>Key Features</h4>
+                <ul id="modalFeatures" class="features-list"></ul>
+                <h4>Technologies Used</h4>
+                <div id="modalTechnologies" class="tech-tags"></div>
+                <div class="modal-buttons">
+                    <a href="#" id="modalDemo" class="btn btn-primary" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m18 13 6-6-6-6"/>
+                            <path d="M3 7h9l6 6-6 6H3"/>
+                        </svg>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-orange-200 to-orange-300 text-gray-800 py-6 relative z-10">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      
+      <!-- Contact Info -->
+      <div class="space-y-2">
+        <h3 class="text-lg font-bold text-orange-800 mb-2">Get In Touch</h3>
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 
+                     0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <span>hoangkhhoi1805@gmail.com</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 
+                     1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 
+                     1V20c0 .55-.45 1-1 1-9.39 
+                     0-17-7.61-17-17 0-.55.45-1 
+                     1-1h3.5c.55 0 1 .45 1 1 
+                     0 1.25.2 2.45.57 3.57.11.35.03.74-.25 
+                     1.02l-2.2 2.2z"/>
+          </svg>
+          <span>+84 901341805</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 
+                     9c0 5.25 7 13 7 13s7-7.75 
+                     7-13c0-3.87-3.13-7-7-7zm0 
+                     9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 
+                     2.5-2.5 2.5 1.12 2.5 2.5-1.12 
+                     2.5-2.5 2.5z"/>
+          </svg>
+          <span>Ho Chi Minh city, Viet Nam</span>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+        <div class="text-center md:text-right md:col-span-1 flex flex-col items-center md:items-end">
+        <h3 class="text-lg font-bold text-orange-800 mb-2">Follow Me</h3>
+        <div class="flex justify-center md:justify-end space-x-3">
+                        <a href="https://www.facebook.com/profile.php?id=61579248102772" 
+                        class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 
+                                    23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.413c0-3.1 
+                                    1.894-4.788 4.659-4.788 1.325 0 2.463.099 
+                                    2.795.143v3.24h-1.918c-1.504 0-1.795.715-1.795 
+                                    1.764v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 
+                                    24 24 23.403 24 22.674V1.326C24 
+                                    .597 23.403 0 22.675 0z"/>
+                        </svg>
+                        </a>
+                                                <a href="https://www.instagram.com/ahhhhhazz/" class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                                                <a href="https://www.linkedin.com/in/mai-hoang-khoi-6167291ba/" class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <!-- GitHub -->
+                        <a href="https://github.com/HoangKhoi1234"
+                        target="_blank" rel="noopener noreferrer"
+                        class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors"
+                        aria-label="GitHub" title="GitHub">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-1.98c-3.04.66-3.68-1.33-3.68-1.33-.53-1.33-1.3-1.69-1.3-1.69-1.06-.73.08-.72.08-.72 1.17.08 1.79 1.2 1.79 1.2 1.05 1.79 2.75 1.27 3.42.97.11-.76.41-1.26.75-1.55-2.63-.29-5.39-1.31-5.39-5.82 0-1.29.47-2.35 1.23-3.18-.12-.3-.54-1.48.12-3.09 0 0 1-.31 3.26 1.2a11.3 11.3 0 0 1 5.94 0c2.26-1.51 3.26-1.2 3.26-1.2.66 1.61.24 2.79.12 3.09.76.83 1.23 1.89 1.23 3.18 0 4.52-2.76 5.53-5.39 5.82.42.36.8 1.06.8 2.16v3.2c0 .31.21.68.79.56A11.5 11.5 0 0 0 12 .5z"/>
+                        </svg>
+                        </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+    <script>
+                // Smooth scrolling for navigation links
+
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Certificate card interaction
+        document.querySelectorAll('.certificate-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a5f29dd70f9b44',t:'MTc1NzA3NzYyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+        // Project data
+        const projects = {
+            project1: {
+                title: "Fun Quiz Game",
+                image: "./pictures/app1.png",
+                description: "Free Quiz Game is an interactive platform that uses AI to generate unique, topic-based quiz questions in real time. Designed for both education and casual use, it allows learners to test knowledge while keeping content fresh and engaging.",
+                features: [
+                    "AI-generated multiple-choice and open-ended questions",
+                    "Topic selection for personalized practice",
+                    "Score tracking and instant feedback",
+                    "Multiple difficulty levels",
+                    "Mobile-friendly design"
+                ],
+                technologies: ["n8n", "Supabase", "AI", "Lovable"],
+                demo: "https://fun-quiz.lovable.app/",
+            },
+            project2: {
+                title: "Excuse AI Bot",
+                image: "./pictures/app2.png",
+                description: "Excuse AI Wizardry is a playful application that leverages natural language processing to produce humorous, smart, or even elaborate excuses. Whether for fun with friends or ice-breaking, it showcases how AI can combine creativity and humor.",
+                features: [
+                    "Generate excuses instantly with one click",
+                    "Multiple tones: casual, formal, or witty",
+                    "Shareable results for social interactions",
+                    "Simple, user-friendly interface",
+                    "Comprehensive reporting and analytics"
+                ],
+                technologies: ["n8n", "AI", "Lovable"],
+                demo: "https://excuse-ai-bot.lovable.app/"
+            },
+            project3: {
+                title: "SAT Revision App",
+                image: "./pictures/app3.png",
+                description: "SAT Revision is an interactive platform designed to simplify and optimize SAT prep. It allows students to build customized quizzes, track study progress, and receive instant answer explanations—all in one intuitive interface.",
+                features: [
+                    "Create topic-based or full-length SAT quizzes",
+                    "Timed and adaptive questions based on your needs",
+                    "Instant feedback with detailed explanations",
+                    "Personalized learning options",
+                ],
+                technologies: ["n8n", "Supabase", "AI", "Lovable", "Bluebook Plus"],
+                demo: "https://sat-revision.lovable.app/"
+            }
+        };
+
+        // Carousel functionality
+        let carouselStates = {
+            chessCarousel: { currentSlide: 0, totalSlides: 3 },
+            communityCarousel: { currentSlide: 0, totalSlides: 4 }
+        };
+
+function changeSlide(carouselId, offset) {
+  const carousel = document.getElementById(carouselId);
+  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+
+  // find current slide
+  const currentIndex = slides.findIndex(s => s.classList.contains('active'));
+  // compute new index (wraps around)
+  const newIndex = (currentIndex + offset + slides.length) % slides.length;
+
+  // switch active class
+  slides[currentIndex].classList.remove('active');
+  slides[newIndex].classList.add('active');
+}
+
+
+
+        // Auto-advance carousels
+        setInterval(() => {
+            changeSlide('chessCarousel', 1);
+        }, 5000);
+
+        setInterval(() => {
+            changeSlide('communityCarousel', 1);
+        }, 6000);
+
+        // Modal functionality
+        function openModal(projectId) {
+            const project = projects[projectId];
+            const modal = document.getElementById('projectModal');
+            
+            document.getElementById('modalImage').src = project.image;
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDescription').textContent = project.description;
+            
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = '';
+            project.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+            
+            const techTags = document.getElementById('modalTechnologies');
+            techTags.innerHTML = '';
+            project.technologies.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'tech-tag';
+                span.textContent = tech;
+                techTags.appendChild(span);
+            });
+            
+            document.getElementById('modalDemo').href = project.demo;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.style.overflow = 'unset';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Only block smooth scroll if href is an actual in-page ID
+                if (href.length > 1 && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+
+        // Form submission
+        async function submitForm(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch('https://n8n.makexyz.site/webhook/getinfo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    alert('Thank you for your message! I will get back to you via email within a few days.');
+                    form.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again later or contact me directly.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!-- LINK URL: https://preview--breezy-digital-persona.lovable.app/ -->
