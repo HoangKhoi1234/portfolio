@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Khoi Mai</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+  /* =========================
+      GLOBAL BASE (same as index)
+      ========================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #333;
+      background-color: white;
+      padding-top: 90px; /* offset for fixed navbar */
+    }
+
+    /* Shared container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* =========================
+      NAVBAR (exact match with index.html)
+      ========================= */
+    
+      
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 15px 0;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #d97706;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #666;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d97706;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    {% comment %} :root{
+      --accent:#d97706; /* gold accent */
+      --muted:#6b7280;
+      --bg:#fff;
+      --line-glow: rgba(217,119,6,0.35);
+      --card-bg: #ffffff;
+    } {% endcomment %}
+
+    :root {
+      --accent: #d97706;
+      --accent-blue: #3B73AF;
+      --muted: #6b7280;
+      --bg: #ffffff;
+      --line-glow: rgba(59, 115, 175, 0.4);
+    }
+
+    body { background: var(--bg); color: #111827; line-height: 1.6; padding-top: 90px; overflow-x: hidden; }
+
+    /* NAVBAR (giữ nguyên) */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 15px 0;
+          }
+    .nav-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold; color: #d97706; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { text-decoration: none; color: #666; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: #d97706; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .page-hero { text-align: center; padding: 60px 0 20px; }
+    .page-hero h1 { font-size: 52px; font-weight: 800; color: var(--accent-blue); }
+    .page-hero p { color: var(--muted); max-width: 700px; margin: 10px auto; font-style: italic; }
+
+    /* TIMELINE */
+    #chess-journey { position: relative; padding: 80px 0 120px; }
+    .timeline-wrap { position: relative; max-width: 1200px; margin: 0 auto; }
+
+    /* LINE */
+    .timeline-line {
+      position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 5px; background: linear-gradient(180deg, var(--accent-blue), var(--accent));
+      border-radius: 999px; box-shadow: 0 0 18px var(--line-glow);
+    }
+
+    /* DOT (the moving ball) */
+    .timeline-dot {
+      position: absolute; left: 50%; transform: translate(-50%, -50%);
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent));
+      border: 3px solid white;
+      box-shadow: 0 0 12px var(--line-glow);
+      z-index: 5;
+      transition: transform 0.25s ease, width 0.25s, height 0.25s;
+    }
+
+    .timeline-dot.expanded {
+      transform: translate(-50%, -50%) scale(1.8);
+      box-shadow: 0 0 28px rgba(59, 115, 175, 0.5);
+    }
+
+    /* MILESTONES */
+    .milestone-row {
+      display: flex; align-items: center; gap: 40px; margin: 100px 0;
+      position: relative; z-index: 2;
+    }
+    .row-image-left { flex-direction: row; }
+    .row-image-right { flex-direction: row-reverse; }
+
+    .milestone-media {
+      flex: 1 1 50%; height: 360px; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer;
+    }
+    .milestone-media img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .milestone-media:hover img { transform: scale(1.05); }
+
+    .milestone-card {
+      flex: 1 1 50%; background: #fff;
+      border: 1px solid rgba(59,115,175,0.15);
+      border-left: 6px solid var(--accent-blue);
+      border-radius: 12px; padding: 24px;
+      box-shadow: 0 10px 25px rgba(59,115,175,0.08);
+    }
+    .milestone-card h3 { color: #d97706ff; font-weight: 700; margin-bottom: 8px; font-size: 30px;}
+    .milestone-card p { color: var(--muted); }
+
+    .time-label {
+      font-size: 20px;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* POPUP (full image view) */
+    .popup {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75); display: flex;
+      justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      z-index: 9999;
+    }
+    .popup.active { opacity: 1; pointer-events: auto; }
+    .popup img {
+      max-width: 80%; max-height: 80%;
+      border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      object-fit: contain;
+    }
+
+    @media (max-width: 980px) {
+      .milestone-row { flex-direction: column; }
+      .timeline-line { left: 24px; transform: none; width: 3px; }
+      .timeline-dot { left: 24px; }
+      .milestone-media { width: 100%; height: 300px; }
+      .milestone-card { width: 100%; margin-top: 16px; }
+    }
+
+    /* footer: full-width background, centered content */
+    footer {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 40px 0;                            /* vertical spacing */
+      border-top: 1px solid rgba(0,0,0,0.05);
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent)); /* full-width gradient */
+      position: relative;
+      left: 0;
+    }
+
+    /* keep inner content centered and limited in width */
+    footer > .max-w-6xl, 
+    footer > .w-full > .max-w-6xl, 
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* small text color */
+    footer div { color: #6b7280; font-size: 13px; }
+
+      /* Time Branch */
+    .timeline-branch {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .row-image-left .timeline-branch { transform: translate(-50%, -50%); margin-left: 6px; }
+    .row-image-right .timeline-branch { transform: translate(-50%, -50%) rotate(180deg); margin-right: 6px; }
+
+    .timeline-year {
+      position: absolute;
+      top: -16px;
+      right: -38px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .row-image-right .timeline-year { left: -38px; right: auto; }
+    .milestone-row::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(217,119,6,0), rgba(217,119,6,0.3), rgba(217,119,6,0));
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+          <img src="./pictures/profile.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+          Khoi Mai
+        </div>
+        <div class="nav-links">
+          <a href="./index.html#home">Home</a>
+          <a href="#" style="color:var(--accent)">Chess</a>
+          <a href="./index.html#projects">Projects</a>
+          <a href="./community.html">Community</a>
+          <a href="./index.html#certificates">Certificates & Achievements</a>
+          <a href="./index.html#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+    <!-- Chess Section -->
+    <section id="chess" class="section">
+
+        <div class="container">
+<!-- Goal Section -->
+<section class="text-center my-12">
+  <!-- Title -->
+  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Chess Journey</h2>
+  
+  <!-- Divider -->
+  <div class="w-24 h-0.5 bg-orange-400 mx-auto mb-6"></div>
+  
+  <!-- Quote -->
+  <p class="text-lg italic text-gray-700 leading-relaxed max-w-3xl mx-auto">
+Chess has been more than a game — it’s been a two-year journey of persistence, growth, and leadership.
+From my first discovery to guiding others at Chess Nang Khieu, I’ve learned that every move — both on and off the board — shapes patience, strategy, and the courage to inspire others to grow alongside me.  </p>
+</section>
+
+  <!-- TIMELINE -->
+  <section id="chess-journey">
+    <div class="timeline-wrap">
+      <div class="timeline-line"></div>
+      <div class="timeline-dot" id="dot"></div>
+
+      <div class="milestone-row row-image-left" data-top="10%">
+        <div class="milestone-media" data-img="./pictures/chess2nd.jpg">
+          <img src="./pictures/chess2nd.jpg" alt="Discovered Chess">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">June 2023</div>
+          <h3>My First Chess Tournament</h3>
+          <p>
+Where it all began — learning to stay calm under pressure and think several moves ahead. This first experience taught me patience, strategy, and the excitement of real competition.          </p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-right" data-top="30%">
+        <div class="milestone-media" data-img="./pictures/chess1st.jpg">
+          <img src="./pictures/chess1st.jpg" alt="First Tournament">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Mar 2024</div>
+          <h3>My Final Chess Tournament</h3>
+          <p>
+My last tournament marked the end of a long journey — a test of focus, growth, and composure. It was both a challenge and a celebration of how much I had learned since my very first match.          </p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-left" data-top="10%">
+        <div class="milestone-media" data-img="./pictures/chess7.jpg">
+          <img src="./pictures/chess7.jpg" alt="Discovered Chess">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">June 2024</div>
+          <h3>Chess Orientation day</h3>
+          <p>
+            The start of a new season and new connections. Meeting teammates and learning our team’s rhythm made me excited to keep improving and growing together.
+          </p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-right" data-top="30%">
+        <div class="milestone-media" data-img="./pictures/chess4.jpg">
+          <img src="./pictures/chess4.jpg" alt="First Tournament">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Oct 2024</div>
+          <h3>Chess Nang Khieu First Bonding</h3>
+          <p>
+I was lucky to get to know my teammates beyond the board — sharing laughs, games, and stories that built trust and made me feel part of something bigger.
+          </p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-left">
+        <div class="milestone-media" data-img="./pictures/chess1.jpg">
+          <img src="./pictures/chess1.jpg" alt="National Stage">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Oct 2024</div>
+          <h3>Board Team Pictures</h3>
+          <p>I started to feel part of of a large community — connecting with teammates and building a space where curiosity and teamwork grew naturally.
+      
+          </p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-right">
+        <div class="milestone-media" data-img="./pictures/chess.jpg">
+          <img src="./pictures/chess.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Oct 2024</div>
+          <h3>First pictures together</h3>
+          <p>
+            Our first full team photo — the start of something special. Standing side by side, I could feel the excitement and curiosity that brought us all together. It was the first moment we truly looked like a team.
+      </p>
+        </div>
+      </div>
+
+            <div class="milestone-row row-image-left">
+        <div class="milestone-media" data-img="./pictures/chess9.jpg">
+          <img src="./pictures/chess9.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Dec 2024</div>
+          <h3>Chess Nang Khieu Christmas Open</h3>
+          <p>I helped bring our first biggest event of the year to the stage — seeing everyone compete, laugh, and celebrate made all the effort of our team feel worth it.    </p>
+        </div>
+      </div>
+
+            <div class="milestone-row row-image-right">
+        <div class="milestone-media" data-img="./pictures/chess13.jpg">
+          <img src="./pictures/chess13.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Dec 2024</div>
+          <h3>Last minute check in with staff team</h3>
+          <p>Right after the tournament, we have some moments to take pictures of our team together — a mix of relieve and pride knowing we made it happen.</p>
+        </div>
+      </div>
+                  <div class="milestone-row row-image-left">
+        <div class="milestone-media" data-img="./pictures/chess8.jpg">
+          <img src="./pictures/chess8.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">May 2025</div>
+          <h3>Chess Nang Khieu Rookie Tournament</h3>
+          <p>Organizing my second big event taught me more than I expected — from managing schedules to cheering for every player’s first win. Seeing others enjoy the tournament reminded me why I loved chess in the first place. </p>
+        </div>
+      </div>
+                  <div class="milestone-row row-image-right">
+        <div class="milestone-media" data-img="./pictures/chess14.jpg">
+          <img src="./pictures/chess14.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">May 2025</div>
+          <h3>Final photos with the team</h3>
+          <p>By the time we took this picture, we had been through countless matches, meetings, and late nights. Behind every smile were inside jokes, shared stress, and quiet moments of pride.</p>
+        </div>
+      </div>
+                  <div class="milestone-row row-image-left">
+        <div class="milestone-media" data-img="./pictures/11.jpg">
+          <img src="./pictures/chess11.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">May 2025</div>
+          <h3>Handmade gifts for participation</h3>
+          <p>We stayed up late preparing these handmade gifts — each one packed with effort, doodles, and heartfelt notes. Those small gestures made the event feel warm and personal.</p>
+        </div>
+      </div>
+
+                  <div class="milestone-row row-image-right">
+        <div class="milestone-media" data-img="./pictures/chess19.jpg">
+          <img src="./pictures/chess19.jpg" alt="Club Leadership">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Jul 2026</div>
+          <h3>Final photos of the year with my bros</h3>
+          <p>Our last photo of the school year felt sad. We laughed about any kinds of jokes, helped each other on the chess journey. Looking back, I realized how this friendship had shaped my chess journey and who I’d become.</p>
+        </div>
+      </div>
+
+      <div class="milestone-row row-image-left">
+        <div class="milestone-media" data-img="./pictures/chess20.jpg">
+          <img src="./pictures/chess20.jpg" alt="Future Goals">
+        </div>
+        <div class="milestone-card">
+          <div class="time-label">Aug 2026</div>
+          <h3>Last Boding together</h3>
+          <p>It was our final meetup before everyone started their new paths. We played, talked, and reflected on how far we’d come since that first day. It wasn’t about competition anymore.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+
+  <!-- POPUP IMAGE -->
+  <div class="popup" id="popup">
+    <img src="" alt="Popup" id="popup-img">
+  </div>
+
+<script>
+
+const dot = document.getElementById('dot');
+const milestones = document.querySelectorAll('.milestone-row');
+const popup = document.getElementById('popup');
+const popupImg = document.getElementById('popup-img');
+const wrap = document.querySelector('.timeline-wrap');
+const rect = () => wrap.getBoundingClientRect();
+
+// Animate dot following mouse along the timeline
+let targetY = 0, currentY = 0;
+document.addEventListener('mousemove', e => {
+  const r = rect();
+  targetY = Math.min(Math.max(e.clientY - r.top, 0), r.height);
+});
+
+// Smooth animation frame update for the dot
+function animateDot() {
+  currentY += (targetY - currentY) * 0.1;
+  dot.style.top = currentY + 'px';
+
+  // Pulse animation near milestones
+  let near = false;
+  milestones.forEach(m => {
+    const mRect = m.getBoundingClientRect();
+    const mMid = mRect.top + mRect.height / 2 - r.top;
+    if (Math.abs(currentY - mMid) < 100) near = true;
+  });
+  dot.classList.toggle('expanded', near);
+  requestAnimationFrame(animateDot);
+}
+requestAnimationFrame(animateDot);
+
+// Reveal milestones when scrolling
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+// Add animation classes
+milestones.forEach((m, i) => {
+  m.style.transition = 'all 0.8s cubic-bezier(.22,.9,.34,1)';
+  m.style.transitionDelay = `${i * 0.1}s`;
+  m.classList.add('opacity-0');
+  revealObserver.observe(m);
+});
+
+// Smooth fade-in effect when visible
+window.addEventListener('scroll', () => {
+  milestones.forEach(m => {
+    const rect = m.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      m.style.opacity = 1;
+      m.style.transform = 'translateY(0) scale(1)';
+    } else {
+      m.style.opacity = 0;
+      m.style.transform = 'translateY(40px) scale(0.95)';
+    }
+  });
+});
+
+// Pop-up full image with zoom animation
+document.querySelectorAll('.milestone-media').forEach(media => {
+  media.addEventListener('click', () => {
+    popupImg.src = media.dataset.img;
+    popup.classList.add('active');
+    popupImg.style.transform = 'scale(0.8)';
+    setTimeout(() => popupImg.style.transform = 'scale(1)', 50);
+  });
+});
+
+popup.addEventListener('click', () => popup.classList.remove('active'));
+
+// Bonus: subtle parallax for media images
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.milestone-media img').forEach(img => {
+    const rect = img.getBoundingClientRect();
+    const offset = rect.top / window.innerHeight * 30;
+    img.style.transform = `translateY(${offset}px) scale(1.05)`;
+  });
+});
+</script>
+
+</body>
+</html>
