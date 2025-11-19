@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates & Achievements - Mai Hoang Khoi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #2B7A9C 0%, #1e5a7a 100%);
+            background-attachment: fixed;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+            padding: 1rem 5%;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 10rem 5% 6rem;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            margin-bottom: 5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .page-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-quote {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-style: italic;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Certificates Grid */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            cursor: pointer;
+        }
+
+        .certificate-card:nth-child(1) { animation-delay: 0.2s; }
+        .certificate-card:nth-child(2) { animation-delay: 0.3s; }
+        .certificate-card:nth-child(3) { animation-delay: 0.4s; }
+        .certificate-card:nth-child(4) { animation-delay: 0.5s; }
+        .certificate-card:nth-child(5) { animation-delay: 0.6s; }
+        .certificate-card:nth-child(6) { animation-delay: 0.7s; }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 153, 51, 0.5);
+        }
+
+        .certificate-image-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.05);
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 153, 51, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        .certificate-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-issuer {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-date {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .certificate-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 153, 51, 0.3);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 153, 51, 0.5);
+        }
+
+        /* CV Download Section */
+        .cv-download-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .cv-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cv-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .cv-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, #ff9933, #ffb366);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 153, 51, 0.4);
+        }
+
+        .cv-download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 153, 51, 0.6);
+            background: linear-gradient(135deg, #ffb366, #ff9933);
+        }
+
+        .cv-icon {
+            font-size: 2rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #ff9933;
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ff9933;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff9933;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: #ff9933;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(10deg);
+            background: #ffeb3b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .main-content {
+                padding: 8rem 5% 4rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-quote {
+                font-size: 1.2rem;
+            }
+
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cv-title {
+                font-size: 2rem;
+            }
+
+            .cv-download-btn {
+                font-size: 1.1rem;
+                padding: 1.2rem 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-quote {
+                font-size: 1rem;
+            }
+
+            .certificate-title {
+                font-size: 1.3rem;
+            }
+
+            .cv-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="./pictures/profile.jpg" alt="Khoi Mai">
+            <span class="logo-text">Khoi Mai</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="achievements.html" class="active">Certificates & Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html" class="mobile-link">Home</a></li>
+            <li><a href="chess.html" class="mobile-link">Chess</a></li>
+            <li><a href="project.html" class="mobile-link">Projects</a></li>
+            <li><a href="community.html" class="mobile-link">Community</a></li>
+            <li><a href="achievements.html" class="mobile-link">Certificates & Achievements</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="content-container">
+            <!-- Quote Section -->
+            <div class="quote-section">
+                <h1 class="page-title">Certificates & Achievements</h1>
+                <p class="page-quote">
+                    "Every achievement is a stepping stone to greater heights. These certifications represent not just knowledge gained, but dedication, perseverance, and a commitment to continuous growth."
+                </p>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div class="certificates-grid">
+                <!-- Certificate 1 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi2.png')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi2.png" alt="HackerRank Certificate" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">Problem Solving (Intermediate) Certificate</h3>
+                    <p class="certificate-issuer">HackerRank</p>
+                    <p class="certificate-date">Issued: July 2025</p>
+                    <p class="certificate-description">
+                        Proficiency in algorithmic problem-solving, data structures, and coding challenges with intermediate-level complexity.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Optimization</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi3.png')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi3.png" alt="HKIMO Certificate" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">Silver Award – HKIMO</h3>
+                    <p class="certificate-issuer">Hong Kong International Mathematical Olympiad</p>
+                    <p class="certificate-date">Issued: June 2025</p>
+                    <p class="certificate-description">
+                        Achieved Silver Award in the Senior Secondary Group for outstanding performance in international math competition.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Mathematics</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Competition</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi4.png')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi4.png" alt="CIMO Certificate" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">Gold Award – CIMO</h3>
+                    <p class="certificate-issuer">Copernicus International Mathematical Olympiad</p>
+                    <p class="certificate-date">Issued: February 2025</p>
+                    <p class="certificate-description">
+                        With one of the highest scores achieved, this accomplishment highlights exceptional mathematical skills, problem-solving ability, and dedication to excellence.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Mathematical Problem Solving</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Competition Excellence</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi5.png')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi5.png" alt="Teky Internship Certificate" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">Teky Internship Certificate</h3>
+                    <p class="certificate-issuer">Teky Academy - Le Quang Tuan (Education Director)</p>
+                    <p class="certificate-date">Issued: July 2025</p>
+                    <p class="certificate-description">
+                        This internship project focuses on exploring innovative approaches to integrate automation and AI technologies into educational content creation, enhancing efficiency, personalization, and accessibility in learning resources.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">AI Training</span>
+                        <span class="skill-tag">Education Technology</span>
+                        <span class="skill-tag">Automation</span>
+                        <span class="skill-tag">Content Creation</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi1.png')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi1.png" alt="AI Training Certificate" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">AI Training Dataset Contribution</h3>
+                    <p class="certificate-issuer">Advanced Mathematics Translation Project</p>
+                    <p class="certificate-date">Issued: 2025</p>
+                    <p class="certificate-description">
+                        Contributed to the development of AI training datasets by translating and coding 100 advanced math problems into English using Overleaf, earning $200 in recognition of accuracy, responsibility, and teamwork.
+                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">AI Training</span>
+                        <span class="skill-tag">Overleaf</span>
+                        <span class="skill-tag">Translation</span>
+                        <span class="skill-tag">Mathematics</span>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-card" onclick="openModal('./pictures/certi6.jpg')">
+                    <div class="certificate-image-container">
+                        <img src="./pictures/certi6.jpg" alt="Additional Achievement" class="certificate-image">
+                        <div class="preview-badge">🔍 Click to Preview</div>
+                    </div>
+                    <h3 class="certificate-title">Ho Chi Minh City Grade 9 Excellent Student Contest – Mathematics, Second Prize</h3>
+                    <p class="certificate-issuer">Ho Chi Minh City Department of Education and Training</p>
+                    <p class="certificate-date">August 2022</p>
+                    <p class="certificate-description">
+This award recognizes exceptional mathematical ability, problem-solving skills, and dedication to academic excellence for outstanding performance                    </p>
+                    <div class="certificate-skills">
+                        <span class="skill-tag">Specialized Mathematical Problem Solving</span>
+                        <span class="skill-tag">Logical Reasoning</span>
+                        <span class="skill-tag">Time Management under Pressure</span>                    </div>
+                </div>
+            </div>
+
+            <!-- CV Download Section -->
+            <div class="cv-download-section">
+                <h2 class="cv-title">Want to Know More?</h2>
+                <p class="cv-subtitle">Check out my CV to discover my experience right here</p>
+                <a href="https://drive.google.com/file/d/17S7DdpZh6RlMffr7q2LN2wtvubmfG9dB/view" target="_blank" class="cv-download-btn">
+                    <span class="cv-icon">📄</span>
+                    <span>Download My Full Potential (CV)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Certificate Preview -->
+    <div class="modal" id="certificateModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img src="" alt="Certificate Preview" class="modal-image" id="modalImage">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>High School Student Specialized in Mathematics at VNU-HCM High School for the Gifted</p>
+                <p>Passionate about Computer Science, Chess, and Mathematics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="chess.html">Chess</a>
+                <a href="project.html">Projects</a>
+                <a href="community.html">Community</a>
+                <a href="certificates.html">Certificates & Achievements</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Email: hoangkhhoi1805@gmail.com</p>
+                <p>Location: Ho Chi Minh City, Vietnam</p>
+                <!--
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="GitHub">💻</a>
+                    <a href="#" aria-label="Email">📧</a>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mai Hoang Khoi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Modal functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('certificateModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('certificateModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,351 +1,858 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Khoi Mai</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - Mai Hoang Khoi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #2B7A9C;
+        }
 
-  <style>
-    /* =========================
-      GLOBAL BASE (same as index)
-      ========================= */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
 
-    :root {
-      --accent: #d97706;
-      --accent-blue: #3B73AF;
-      --muted: #6b7280;
-      --bg: #ffffff;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    body {
-      line-height: 1.6;
-      color: #333;
-      background-color: white;
-      padding-top: 90px; /* offset for fixed navbar */
-    }
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+        }
 
-    /* Shared container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
 
-    /* =========================
-      NAVBAR (exact match with index.html)
-      ========================= */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      padding: 15px 0;
-    }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
 
-    .nav-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 24px;
-      font-weight: bold;
-      color: var(--accent);
-    }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
+        nav a:hover::after {
+            width: 100%;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #666;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+        nav a.active::after {
+            width: 100%;
+        }
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-    }
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
 
-    /* HERO */
-    .page-hero { text-align: center; padding: 60px 0 20px; }
-    .page-hero h1 { font-size: 52px; font-weight: 800; color: var(--accent-blue); }
-    .page-hero p { color: var(--muted); max-width: 700px; margin: 10px auto; font-style: italic; }
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
 
-    /* ======== COMMUNITY WALL WRAPPER ========
-       Single rectangle border around the whole grid
-    =========================================== */
-    #community-wall {
-      width: 100%;
-      padding: 28px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ffffff, #f9fafb);
-    }
+        .mobile-menu.active {
+            max-height: 400px;
+            padding: 1rem 5%;
+        }
 
-    /* Wrapper that holds the bordered rectangle */
-    .community-grid-wrapper {
-      width: 95%;
-      border-radius: 14px;
-      padding: 12px;
-      background: linear-gradient(180deg, rgba(255,250,245,0.6), rgba(255,255,255,0.4));
-      border: 4px solid var(--accent);               /* <-- single outer border */
-      box-shadow: 0 10px 30px rgba(217,119,6,0.06);
-      overflow: hidden;
-    }
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-    /* The grid itself (no borders on images) */
-    .community-grid {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      grid-auto-rows: minmax(80px, 1fr);
-      gap: 8px;
-      width: 100%;
-      height: auto;
-    }
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
 
-    /* Images: removed individual borders (fixes the "random lines") */
-    .community-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: none;                    /* removed border */
-      border-radius: 8px;
-      display: block;                  /* remove inline-gap artifacts */
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform 0.32s ease, box-shadow 0.32s ease;
-      cursor: pointer;
-      background: #fffaf3;             /* subtle background to avoid seams */
-    }
+        /* Community Section */
+        .community-section {
+            padding: 10rem 5% 6rem;
+            min-height: 100vh;
+        }
 
-    .community-grid img:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 14px 36px rgba(217,119,6,0.16);
-      z-index: 2;
-    }
+        .community-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-    /* ======== POPUP MODAL ======== */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      backdrop-filter: blur(6px);
-    }
+        .page-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
 
-    .modal-overlay.active {
-      display: flex;
-      animation: fadeIn 0.25s ease;
-    }
+        .page-subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 4rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
 
-    .modal-content {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 1000px;
-      width: 92%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-      animation: zoomIn 0.25s ease;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .modal-content img {
-      width: 100%;
-      max-height: 80vh; /* full image displayed */
-      object-fit: contain;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #f8fafc;
-    }
+        /* Trip Menu */
+        .trip-menu {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
 
-    .modal-content h3 {
-      font-size: 20px;
-      color: var(--accent-blue);
-      margin-bottom: 8px;
-    }
+        .trip-menu-item {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1.5rem 3rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .modal-content p {
-      font-size: 15px;
-      color: var(--muted);
-    }
+        .trip-menu-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
-    .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      font-weight: bold;
-      color: var(--accent);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+        .trip-menu-item.active {
+            background: rgba(255, 153, 51, 0.8);
+            border-color: #ff9933;
+        }
 
-    .close-btn:hover { transform: scale(1.08); }
+        /* Trip Content */
+        .trip-content {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
 
-    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-    @keyframes zoomIn { from { transform: scale(0.96); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+        .trip-content.active {
+            display: block;
+        }
 
-    /* ======== RESPONSIVE ======== */
-    @media (max-width: 1200px) {
-      .community-grid { grid-template-columns: repeat(6, 1fr); }
-    }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-    @media (max-width: 900px) {
-      .community-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+        .trip-main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            text-align: center;
+            margin-bottom: 4rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
-    @media (max-width: 600px) {
-      .community-grid { grid-template-columns: repeat(3, 1fr); }
-      .community-grid-wrapper { padding: 10px; border-width: 3px; }
-    }
-  </style>
+        /* Snake Structure */
+        .snake-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .snake-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .snake-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .snake-row.reverse {
+            direction: rtl;
+        }
+
+        .snake-row.reverse > * {
+            direction: ltr;
+        }
+
+        .snake-quote {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .snake-quote p {
+            font-size: 1.4rem;
+            color: white;
+            line-height: 1.8;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .snake-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-family: Georgia, serif;
+        }
+
+        .snake-image {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .snake-image::before {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .snake-image:hover::before {
+            opacity: 1;
+        }
+
+        .snake-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 153, 51, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .snake-image:hover::after {
+            opacity: 1;
+        }
+
+        .snake-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .snake-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Arrow Connector */
+        .arrow-connector {
+            text-align: center;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .arrow-connector svg {
+            width: 60px;
+            height: 60px;
+            fill: rgba(255, 255, 255, 0.6);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup img {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .popup.active img {
+            transform: scale(1);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ff9933;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff9933;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: #ff9933;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(10deg);
+            background: #ffeb3b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .community-section {
+                padding: 8rem 5% 4rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .trip-main-title {
+                font-size: 2.5rem;
+            }
+
+            .snake-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .snake-row.reverse {
+                direction: ltr;
+            }
+
+            .snake-image {
+                height: 280px;
+            }
+
+            .snake-quote p {
+                font-size: 1.2rem;
+            }
+
+            .trip-menu-item {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .trip-main-title {
+                font-size: 2rem;
+            }
+
+            .snake-quote p {
+                font-size: 1rem;
+            }
+
+            .snake-image {
+                height: 220px;
+            }
+
+            .trip-menu-item {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="nav-content">
+    <!-- Header -->
+    <header>
         <div class="logo">
-          <img src="./pictures/profile.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover">
-          Khoi Mai
+            <img src="./pictures/profile.jpg" alt="Khoi Mai">
+            <span class="logo-text">Khoi Mai</span>
         </div>
-        <div class="nav-links">
-          <a href="./index.html#home">Home</a>
-          <a href="./chess.html#chess-journey">Chess</a>
-          <a href="./index.html#projects">Projects</a>
-          <a href="#"  style="color:var(--accent)">Community</a>
-          <a href="./index.html#certificates">Certificates & Achievements</a>
-          <a href="./index.html#contact">Contact</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="#" class="active">Community</a></li>
+                <li><a href="achievements.html">Certificates & Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-      </div>
-    </div>
-  </nav>
+    </header>
 
-  <!-- HERO / TITLE -->
-        <div class="container">
-<!-- Goal Section -->
-<section class="text-center my-12">
-  <!-- Title -->
-  <h2 class="text-5xl font-bold text-orange-500 mb-4 italic">Community Involvement</h2>
-  
-  <!-- Divider -->
-  <div class="w-96 h-0.5 bg-orange-400 mx-auto mb-6"></div>
-  
-  <!-- Quote -->
-  <p class="text-lg italic text-gray-700 leading-relaxed max-w-3xl mx-auto">
-Through this gallery, I’ve come to see that the most meaningful moves happen off the chessboard — in acts of giving, connecting, and inspiring others to dream.</section>
-  <!-- COMMUNITY WALL -->
-  <section id="community-wall">
-    <div class="community-grid-wrapper container">
-      <div class="community-grid">
-        <!-- 24 images -->
-        <img src="./pictures/go3.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="Packing essentials for local schools.">
-        <img src="./pictures/go4.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="Unpacking supplies for Children.">
-        <img src="./pictures/go6.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="Outdoor Bonding Moments.">
-        <img src="./pictures/go7.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="The Children's Smiles when Receiving Gifts">
-        <img src="./pictures/go8.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="Giving out Gifts to Game Winners.">
-        <img src="./pictures/go11.JPG" alt="Charity trip" data-title="Charity Trip" data-desc="Encouraging Children through games, art, and hands-on learning.">      
-        <img src="./pictures/go13.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Noisy Interactive Moments with the Children.">
-        <img src="./pictures/go14.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Sharing laughter, care, and meaningful moments with the children.">
-        <img src="./pictures/go15.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Sharing Joy.">
-        <img src="./pictures/go16.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Enjoyable moments with the Children.">
-        <img src="./pictures/go17.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Finals snacks for the good boys.">
-        <img src="./pictures/go18.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Final touches of the project.">
-        <img src="./pictures/go19.jpg" alt="Charity trip" data-title="Charity Trip" data-desc="Gathering as one big family to wrap up meaningful experiences.">
-        <img src="./pictures/go20.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Joyful Games with the Children.">
-        <img src="./pictures/go21.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Circle Time, Stories, and Fun.">
-        <img src="./pictures/go22.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Creative Teamwork in Action.">
-        <img src="./pictures/go23.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Bonding through Play and Smiles.">
-        <img src="./pictures/go24.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Community Support in Action.">
-        <img src="./pictures/go25.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Resting, Sharing, and Friendship.">
-        <img src="./pictures/go26.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Behind-the-Scenes Team Moment.">
-        <img src="./pictures/go27.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Group Photo Full of Spirit.">
-        <img src="./pictures/go28.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Closing Smiles, lasting Memories.">
-        <img src="./pictures/go30.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Focused Classroom Chess Session.">
-        <img src="./pictures/go31.jpg" alt="Chessing is Caring trip" data-title="Chessing is Caring trip" data-desc="Interactive Teaching in Progress.">
-      </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html" class="mobile-link">Home</a></li>
+            <li><a href="chess.html" class="mobile-link">Chess</a></li>
+            <li><a href="project.html" class="mobile-link">Projects</a></li>
+            <li><a href="#" class="mobile-link">Community</a></li>
+            <li><a href="achievements.html" class="mobile-link">Certificates & Achievements</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        </ul>
     </div>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal">
-      <div class="modal-content">
-        <button class="close-btn" id="closeBtn">&times;</button>
-        <img id="modal-img" src="" alt="">
-        <h3 id="modal-title"></h3>
-        <p id="modal-desc"></p>
-      </div>
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="community-container">
+            <h1 class="page-title">Community Impact</h1>
+            <p class="page-subtitle">Giving back through meaningful charity trips</p>
+
+            <!-- Trip Menu -->
+            <div class="trip-menu">
+                <div class="trip-menu-item active" data-trip="universe">Unveiling the Universe</div>
+                <div class="trip-menu-item" data-trip="chessing">Chessing is Caring</div>
+            </div>
+
+            <!-- Trip 1: Unveiling the Universe -->
+            <div class="trip-content active" id="universe">
+                <h2 class="trip-main-title">Unveiling the Universe Trip</h2>
+                
+                <div class="snake-container">
+                    <!-- Row 1 -->
+                    <div class="snake-row">
+                        <div class="snake-quote">
+                            <p>"Education is the most powerful weapon which you can use to change the world. Through sharing knowledge about the cosmos, we hope to inspire young minds."</p>
+                        </div>
+                        <div class="snake-image" data-img="./pictures/go4.JPG">
+                            <img src="./pictures/go4.JPG" alt="Universe Trip 1">
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="snake-row reverse">
+                        <div class="snake-image" data-img="./pictures/go11.JPG">
+                            <img src="./pictures/go11.JPG" alt="Universe Trip 2">
+                        </div>
+                        <div class="snake-quote">
+                            <p>"Witnessing the wonder in children's eyes as they learn about stars and planets reminded us why we embarked on this journey."</p>
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="snake-row">
+                        <div class="snake-quote">
+                            <p>"Every child deserves to dream beyond their circumstances. Through astronomy, we opened doors to infinite possibilities."</p>
+                        </div>
+                        <div class="snake-image" data-img="./pictures/go15.jpg">
+                            <img src="./pictures/go15.jpg" alt="Universe Trip 3">
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="snake-row reverse">
+                        <div class="snake-image" data-img="./pictures/go19.jpg">
+                            <img src="./pictures/go19.jpg" alt="Universe Trip 4">
+                        </div>
+                        <div class="snake-quote">
+                            <p>"The universe is vast, but our impact on these young lives made it feel intimate and purposeful. Together, we explored the cosmos."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 2: Chessing is Caring -->
+            <div class="trip-content" id="chessing">
+                <h2 class="trip-main-title">Chessing is Caring Trip</h2>
+                
+                <div class="snake-container">
+                    <!-- Row 1 -->
+                    <div class="snake-row">
+                        <div class="snake-quote">
+                            <p>"Chess teaches patience, strategy, and critical thinking. We brought these life lessons to underprivileged communities with open hearts."</p>
+                        </div>
+                        <div class="snake-image" data-img="./pictures/go21.jpg">
+                            <img src="./pictures/go21.jpg" alt="Chess Trip 1">
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="snake-row reverse">
+                        <div class="snake-image" data-img="./pictures/go24.jpg">
+                            <img src="./pictures/go24.jpg" alt="Chess Trip 2">
+                        </div>
+                        <div class="snake-quote">
+                            <p>"Every move on the board became a lesson in life. The smiles and laughter made every effort worthwhile."</p>
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="snake-row">
+                        <div class="snake-quote">
+                            <p>"My favorite moment. Through teaching, I have found what these underprivileged children finds the meaning of love. They just wanted a picture together, indicating love."</p>
+                        </div>
+                        <div class="snake-image" data-img="./pictures/go25.jpg">
+                            <img src="./pictures/go25.jpg" alt="Chess Trip 3">
+                        </div>
+                    </div>
+
+                    <div class="arrow-connector">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="snake-row reverse">
+                        <div class="snake-image" data-img="./pictures/go27.jpg">
+                            <img src="./pictures/go27.jpg" alt="Chess Trip 4">
+                        </div>
+                        <div class="snake-quote">
+                            <p>"In teaching chess, we learned as much as we taught. The resilience and joy of these children inspired us deeply."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <img src="" alt="Popup" id="popup-img">
     </div>
-  </section>
 
-  <script>
-    // Modal behavior (unchanged)
-    const images = document.querySelectorAll(".community-grid img");
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modal-img");
-    const modalTitle = document.getElementById("modal-title");
-    const modalDesc = document.getElementById("modal-desc");
-    const closeBtn = document.getElementById("closeBtn");
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>High School Student Specialized in Mathematics at VNU-HCM High School for the Gifted</p>
+                <p>Passionate about Computer Science, Chess, and Mathematics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="chess.html">Chess</a>
+                <a href="project.html">Projects</a>
+                <a href="community.html">Community</a>
+                <a href="achievements.html">Certificates & Achievements</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Email: hoangkhhoi1805@gmail.com</p>
+                <p>Location: Ho Chi Minh City, Vietnam</p>
+                <!--
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="GitHub">💻</a>
+                    <a href="#" aria-label="Email">📧</a>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mai Hoang Khoi. All rights reserved.</p>
+        </div>
+    </footer>
 
-    images.forEach(img => {
-      img.addEventListener("click", () => {
-        modalImg.src = img.src;
-        modalTitle.textContent = img.dataset.title || "Community Moment";
-        modalDesc.textContent = img.dataset.desc || "";
-        modal.classList.add("active");
-      });
-    });
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
 
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("active");
-    });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
 
-    modal.addEventListener("click", e => {
-      // close when clicking outside content
-      if (e.target === modal) modal.classList.remove("active");
-    });
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
 
-    // small accessibility: close modal on ESC
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') modal.classList.remove('active');
-    });
-  </script>
+        // Trip menu switching
+        const menuItems = document.querySelectorAll('.trip-menu-item');
+        const tripContents = document.querySelectorAll('.trip-content');
 
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const tripId = item.dataset.trip;
+                
+                menuItems.forEach(mi => mi.classList.remove('active'));
+                item.classList.add('active');
+                
+                tripContents.forEach(tc => tc.classList.remove('active'));
+                document.getElementById(tripId).classList.add('active');
+
+                // Reset scroll animations
+                setTimeout(() => {
+                    observeRows();
+                }, 100);
+            });
+        });
+
+        // Scroll animations
+        function observeRows() {
+            const rows = document.querySelectorAll('.snake-row');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            rows.forEach(row => {
+                row.classList.remove('visible');
+                observer.observe(row);
+            });
+        }
+
+        observeRows();
+
+        // Popup functionality
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popup-img');
+
+        document.querySelectorAll('.snake-image').forEach(image => {
+            image.addEventListener('click', () => {
+                popupImg.src = image.dataset.img;
+                popup.classList.add('active');
+            });
+        });
+
+        popup.addEventListener('click', () => {
+            popup.classList.remove('active');
+        });
+    </script>
 </body>
 </html>

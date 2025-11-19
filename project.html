@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Mai Hoang Khoi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #2B7A9C;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+            padding: 1rem 5%;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 10rem 5% 6rem;
+            min-height: 100vh;
+        }
+
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .page-subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .project-item:nth-child(1) { animation-delay: 0.3s; }
+        .project-item:nth-child(2) { animation-delay: 0.5s; }
+        .project-item:nth-child(3) { animation-delay: 0.7s; }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-role {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .project-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+
+        .project-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-description {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        /* Project Gallery */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Inspiration Section */
+        .inspiration-section {
+
+        }
+
+        .inspiration-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .inspiration-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .inspiration-button {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .inspiration-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ff9933;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff9933;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: #ff9933;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(10deg);
+            background: #ffeb3b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .projects-section {
+                padding: 8rem 5% 4rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+
+            .project-image {
+                height: 250px;
+            }
+
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-image {
+                height: 200px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+            }
+
+            .project-role {
+                font-size: 1rem;
+            }
+
+            .project-description,
+            .project-highlights {
+                font-size: 1rem;
+            }
+
+            .inspiration-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="./pictures/profile.jpg" alt="Khoi Mai">
+            <span class="logo-text">Khoi Mai</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="project.html" class="active">Projects</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="achievements.html">Certificates & Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html" class="mobile-link">Home</a></li>
+            <li><a href="chess.html" class="mobile-link">Chess</a></li>
+            <li><a href="project.html" class="mobile-link">Projects</a></li>
+            <li><a href="community.html" class="mobile-link">Community</a></li>
+            <li><a href="achievements.html" class="mobile-link">Certificates & Achievements</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="projects-container">
+            <h1 class="page-title">My Projects</h1>
+            <p class="page-subtitle">(both serious and fun!)</p>
+
+            <div class="projects-list">
+                <!-- Project 1: The SAT Revision Hub -->
+                <div class="project-item">
+                    <div class="project-left">
+                        <div>
+                            <h2 class="project-title">SAT Revision Hub</h2>
+                            <p class="project-role">Designer, Developer</p>
+                        </div>
+                        <a href="https://sat-revision.vercel.app/" class="project-button" target="_blank">Visit Website</a>
+                        <img src="./pictures/app3.png" alt="The SAT Revision Hub" class="project-image">
+                    </div>
+                    <div class="project-right">
+                        <p class="project-description">
+                            Born from my achievement of a 1540 SAT score, The SAT Revision Hub represents my commitment to democratizing test preparation. Witnessing classmates struggle without adequate resources inspired me to transform my personal study materials into a comprehensive, accessible platform. What started as shared notes evolved into a full-fledged digital learning ecosystem, now helping students worldwide who lack financial means to access premium SAT prep resources.
+                        </p>
+                        <p class="project-highlights">
+                            Built entirely from scratch using HTML, CSS, and JavaScript with AI-assisted development, this platform showcases my ability to identify real-world problems and craft practical solutions. The hub features meticulously organized study guides, practice questions, strategic approaches, and my personal techniques that led to my score (all freely available to anyone with internet access).
+                        </p>
+                        <!--
+                        <div class="project-gallery">
+                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" alt="SAT Study Materials" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop" alt="Online Learning Platform" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=400&h=300&fit=crop" alt="Educational Resources" class="gallery-image">
+                        </div>
+                        -->
+
+                    </div>
+                </div>
+
+                <!-- Project 2: The Noders -->
+                <div class="project-item">
+                    <div class="project-left">
+                        <div>
+                            <h2 class="project-title">The Noders Project</h2>
+                            <p class="project-role">Co-founder, Head of Content</p>
+                        </div>
+                        <a href="https://www.thenodersptnk.com/" class="project-button" target="_blank">Visit Website</a>
+                        <img src="./pictures/app4.png" alt="The Noders" class="project-image">
+                    </div>
+                    <div class="project-right">
+                        <p class="project-description">
+                            The Noders emerged from a vision to ignite technological curiosity within my school community. As Co-founder and Head of Content, I spearheaded the creation of Vietnam's first student-led tech publication focusing on AI/ML and software engineering. Leading a passionate team of writers and creators, I've cultivated a culture of knowledge-sharing that transcends traditional classroom boundaries, inspiring peers to explore the cutting edge of computer science.
+                        </p>
+                        <p class="project-highlights">
+                            I develop comprehensive editorial strategies, mentor emerging tech writers, and ensure our articles maintain technical accuracy while remaining accessible. Through The Noders, we've published dozens of in-depth articles on machine learning algorithms, software development best practices, and emerging technologies, establishing ourselves as the go-to resource for tech-curious students at VNU-HCM High School for the Gifted.
+                        </p>
+                        <!--                        
+                        <div class="project-gallery">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop" alt="AI and Technology" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop" alt="Collaborative Learning" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop" alt="Software Development" class="gallery-image">
+                        </div>-->
+
+                    </div>
+                </div>
+
+                <!-- Project 3: Personal Portfolio -->
+                <div class="project-item">
+                    <div class="project-left">
+                        <div>
+                            <h2 class="project-title">Personal Portfolio Website</h2>
+                            <p class="project-role">Designer, Developer</p>
+                        </div>
+                        <a href="index.html" class="project-button">View Portfolio</a>
+                        <img src="./pictures/app5.png" alt="Portfolio Website" class="project-image">
+                    </div>
+                    <div class="project-right">
+                        <p class="project-description">
+                            This portfolio means more than just a collection of achievements, it's a digital narrative of my multifaceted journey as a student-athlete-developer. Meticulously crafted with modern web technologies, each section tells a story: from chess tournaments that taught me strategic thinking, to coding projects that showcase technical prowess, to community initiatives that reflect my values. The responsive, animation-rich design demonstrates my commitment to creating user experiences that are both aesthetically pleasing and functionally robust.
+                        </p>
+                        <p class="project-highlights">
+                            Built entirely with vanilla HTML, CSS, and JavaScript, this portfolio showcases my mastery of front-end fundamentals without relying on frameworks. Every smooth animation, every responsive breakpoint, and every interactive element was hand-coded to create a seamless experience across all devices. The site balances professionalism with personality, reflecting my unique position at the intersection of mathematics, computer science, and chess.
+                        </p>
+                        <div class="inspiration-section">
+                            <p class="inspiration-text">✨ Design inspiration drawn from my two favorite web aesthetics</p>
+                            <div class="inspiration-links">
+                                <a href="https://www.kantwon.com/" class="inspiration-button" target="_blank">Kantwon Rogers</a>
+                                <a href="https://kaylapadilla.org/" class="inspiration-button" target="_blank">Kayla Padilla</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>High School Student Specialized in Mathematics at VNU-HCM High School for the Gifted</p>
+                <p>Passionate about Computer Science, Chess, and Mathematics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="chess.html">Chess</a>
+                <a href="project.html">Projects</a>
+                <a href="community.html">Community</a>
+                <a href="achievements.html">Certificates & Achievements</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Email: hoangkhhoi1805@gmail.com</p>
+                <p>Location: Ho Chi Minh City, Vietnam</p>
+                <!--
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="GitHub">💻</a>
+                    <a href="#" aria-label="Email">📧</a>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mai Hoang Khoi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
