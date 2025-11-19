@@ -836,7 +836,13 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive */
+/* Responsive */
+        @media (max-width: 1200px) {
+            .lightning-divider {
+                display: none;
+            }
+        }
+
         @media (max-width: 968px) {
             .menu-toggle {
                 display: flex;
@@ -855,14 +861,19 @@
                 min-height: auto;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 gap: 2rem;
                 padding: 2rem 0;
             }
 
             .hero-image {
                 position: relative;
+                top: auto;
+                right: auto;
                 animation: fadeIn 1s ease-out 0.3s forwards;
                 order: 1;
+                display: flex;
+                justify-content: center;
             }
 
             .profile-image {
@@ -870,23 +881,32 @@
                 height: 250px;
             }
 
-            .lightning-divider {
-                display: none;
-            }
-
             .hero-text {
                 position: relative;
-                padding-right: 0;
+                left: auto;
+                bottom: auto;
+                padding-left: 0;
+                padding: 0 1rem;
+                max-width: 100%;
+                text-align: center;
                 animation: fadeIn 1s ease-out 0.6s forwards;
                 order: 2;
             }
 
             .greeting {
                 font-size: 2rem;
+                display: flex;
+                justify-content: center;
             }
 
             .name {
                 font-size: 2.5rem;
+                display: inline-block;
+            }
+
+            .name::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .role {
@@ -899,6 +919,7 @@
 
             .interests {
                 font-size: 1rem;
+                justify-content: center;
             }
 
             .skills {
@@ -906,72 +927,9 @@
                 max-width: 100%;
             }
 
-            .quote-section {
-                padding: 4rem 5%;
+            .cta-button {
+                margin: 0 auto;
             }
-
-            .quote-text {
-                font-size: 1.5rem;
-            }
-
-            .quote-author {
-                font-size: 1.2rem;
-            }
-
-            .quote-img {
-                width: 100%;
-                height: 250px;
-            }
-
-            .carousel-nav {
-                width: 45px;
-                height: 45px;
-            }
-
-            .contact-section {
-                padding: 4rem 5%;
-            }
-
-            .contact-title {
-                font-size: 2.5rem;
-            }
-
-            .contact-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .contact-form {
-                padding: 2rem 1.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .greeting {
-                font-size: 1.8rem;
-            }
-
-            .name {
-                font-size: 2rem;
-            }
-
-            .profile-image {
-                width: 200px;
-                height: 200px;
-            }
-
-            .quote-text {
-                font-size: 1.2rem;
-            }
-
-            .contact-form {
-                padding: 1.5rem 1rem;
-            }
-        }
     </style>
 </head>
 <body>
