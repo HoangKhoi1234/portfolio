@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khoi Mai</title>
+    <title>Chess Journey - Khoi Mai</title>
     <style>
         * {
             margin: 0;
@@ -15,10 +15,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             background: #fff;
-            padding-top: 90px;
         }
 
-        /* Header - Identique à index.html */
+        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -65,7 +64,6 @@
             color: white;
         }
 
-        /* Desktop Navigation */
         nav ul {
             display: flex;
             list-style: none;
@@ -96,19 +94,10 @@
             width: 100%;
         }
 
-        nav a:hover {
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            font-weight: 700;
-        }
-
         nav a.active::after {
             width: 100%;
         }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -123,18 +112,6 @@
             background: white;
             border-radius: 3px;
             transition: all 0.3s ease;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
         }
 
         /* Mobile Menu */
@@ -178,67 +155,98 @@
 
         .mobile-menu a:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
         }
 
         /* Hero Section */
         .page-hero {
-            background: linear-gradient(135deg, #ff9933 0%, #ffb366 50%, #ff9933 100%);
-            padding: 5rem 5% 6rem;
-            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
             position: relative;
             overflow: hidden;
+            margin-top: 90px;
         }
 
         .page-hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 153, 51, 0.1) 0%, transparent 50%);
+            z-index: 1;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 40%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { top: 60%; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { top: 80%; left: 70%; animation-delay: 6s; }
+        .particle:nth-child(5) { top: 30%; left: 50%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { transform: translateY(-30px) translateX(20px); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .page-hero h1 {
             font-size: 4.5rem;
             font-weight: 900;
             color: white;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 2;
+            margin-bottom: 1.5rem;
             opacity: 0;
             animation: fadeInUp 1s ease-out forwards;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            font-weight: 600;
         }
 
         .page-hero .divider {
-            width: 320px;
+            width: 200px;
             height: 4px;
-            background: white;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
             margin: 2rem auto;
             border-radius: 10px;
-            position: relative;
-            z-index: 2;
             opacity: 0;
-            animation: fadeInUp 1s ease-out 0.2s forwards;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
-        .page-hero p {
-            font-size: 1.3rem;
-            color: white;
+        .page-hero .description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.8;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            font-style: italic;
-            position: relative;
-            z-index: 2;
             opacity: 0;
             animation: fadeInUp 1s ease-out 0.4s forwards;
         }
@@ -257,65 +265,81 @@
         /* Timeline Section */
         #chess-journey {
             position: relative;
-            padding: 80px 5% 120px;
-            background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+            padding: 6rem 5% 8rem;
+            background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #3B73AF, #ff9933);
+            margin: 1rem auto 0;
+            border-radius: 10px;
         }
 
         .timeline-wrap {
             position: relative;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Timeline Line */
         .timeline-line {
             position: absolute;
             top: 0;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 5px;
+            width: 4px;
             background: linear-gradient(180deg, #3B73AF, #ff9933);
             border-radius: 999px;
-            box-shadow: 0 0 20px rgba(59, 115, 175, 0.4);
+            box-shadow: 0 0 20px rgba(59, 115, 175, 0.3);
         }
 
-        /* Timeline Dot */
         .timeline-dot {
             position: absolute;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: linear-gradient(135deg, #3B73AF, #ff9933);
-            border: 3px solid white;
-            box-shadow: 0 0 12px rgba(59, 115, 175, 0.4);
+            border: 4px solid white;
+            box-shadow: 0 0 15px rgba(59, 115, 175, 0.5);
             z-index: 5;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .timeline-dot.expanded {
-            transform: translate(-50%, -50%) scale(1.8);
-            box-shadow: 0 0 28px rgba(255, 153, 51, 0.6);
+            transform: translate(-50%, -50%) scale(1.6);
+            box-shadow: 0 0 30px rgba(255, 153, 51, 0.6);
         }
 
-        /* Milestone Row */
         .milestone-row {
             display: flex;
             align-items: center;
-            gap: 40px;
-            margin: 100px 0;
+            gap: 3rem;
+            margin: 6rem 0;
             position: relative;
             z-index: 2;
             opacity: 0;
-            transform: translateY(40px) scale(0.95);
+            transform: translateY(50px);
             transition: all 0.8s cubic-bezier(0.22, 0.9, 0.34, 1);
         }
 
         .milestone-row.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
         .row-image-left {
@@ -326,27 +350,30 @@
             flex-direction: row-reverse;
         }
 
-        /* Milestone Media */
         .milestone-media {
             flex: 1 1 50%;
-            height: 360px;
-            border-radius: 14px;
+            height: 400px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             position: relative;
+            transition: all 0.4s ease;
         }
 
         .milestone-media::before {
-            content: '🔍';
+            content: '🔍 Click to enlarge';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
             opacity: 0;
             transition: opacity 0.3s ease;
-            z-index: 2;
+            z-index: 3;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .milestone-media:hover::before {
@@ -356,17 +383,20 @@
         .milestone-media::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 153, 51, 0.3);
+            inset: 0;
+            background: linear-gradient(135deg, rgba(59, 115, 175, 0.4), rgba(255, 153, 51, 0.4));
             opacity: 0;
             transition: opacity 0.3s ease;
+            z-index: 2;
         }
 
         .milestone-media:hover::after {
             opacity: 1;
+        }
+
+        .milestone-media:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
         }
 
         .milestone-media img {
@@ -380,42 +410,57 @@
             transform: scale(1.1);
         }
 
-        /* Milestone Card */
         .milestone-card {
             flex: 1 1 50%;
             background: white;
-            border: 1px solid rgba(59, 115, 175, 0.15);
-            border-left: 6px solid #3B73AF;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(59, 115, 175, 0.1);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .milestone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #3B73AF, #ff9933);
         }
 
         .milestone-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(59, 115, 175, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
         }
 
         .time-label {
-            font-size: 1.1rem;
-            color: #3B73AF;
+            display: inline-block;
+            font-size: 0.95rem;
+            color: white;
+            background: linear-gradient(135deg, #3B73AF, #5a8dc7);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 1rem;
             letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(59, 115, 175, 0.3);
         }
 
         .milestone-card h3 {
             color: #ff9933;
-            font-weight: 700;
-            margin-bottom: 12px;
-            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-size: 1.9rem;
+            line-height: 1.3;
         }
 
         .milestone-card p {
-            color: #6b7280;
-            line-height: 1.8;
-            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.9;
+            font-size: 1.1rem;
         }
 
         /* Popup */
@@ -425,15 +470,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.92);
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             z-index: 9999;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .popup.active {
@@ -441,21 +486,44 @@
             pointer-events: auto;
         }
 
+        .popup-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 153, 51, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 153, 51, 1);
+            transform: rotate(90deg);
+        }
+
         .popup img {
-            max-width: 85%;
-            max-height: 85%;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
             object-fit: contain;
             transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
         .popup.active img {
             transform: scale(1);
         }
 
-        /* Footer - Identique à index.html */
+        /* Footer */
         footer {
             background: #333;
             color: white;
@@ -488,31 +556,6 @@
 
         .footer-section a:hover {
             color: #ff9933;
-            transform: translateX(5px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: #ff9933;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px) rotate(10deg);
-            background: #ffeb3b;
         }
 
         .footer-bottom {
@@ -523,15 +566,53 @@
         }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            body {
-                padding-top: 70px;
+        @media (max-width: 1125px) {
+            .page-hero {
+                min-height: 60vh;
+                padding: 6rem 4% 3rem;
+                margin-top: 90px;
             }
 
-            header {
-                padding: 1rem 5%;
+            .page-hero h1 {
+                font-size: 3.5rem;
             }
 
+            .page-hero .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .page-hero .description {
+                font-size: 1.1rem;
+                padding: 0 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .milestone-row {
+                gap: 2rem;
+                margin: 5rem 0;
+            }
+
+            .milestone-media {
+                height: 350px;
+            }
+
+            .milestone-card {
+                padding: 2rem;
+            }
+
+            .milestone-card h3 {
+                font-size: 1.7rem;
+            }
+
+            .milestone-card p {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (max-width: 900px) {
             .menu-toggle {
                 display: flex;
             }
@@ -540,71 +621,72 @@
                 display: none;
             }
 
+            .page-hero {
+                min-height: auto;
+                padding: 5rem 3% 3rem;
+                margin-top: 70px;
+            }
+
             .mobile-menu {
                 top: 70px;
             }
 
-            .logo-text {
-                font-size: 1.3rem;
-            }
-
-            .logo img {
-                width: 40px;
-                height: 40px;
-            }
-
-            .page-hero {
-                padding: 4rem 5% 3rem;
-            }
-
             .page-hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
-            .page-hero p {
-                font-size: 1.1rem;
+            .page-hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .page-hero .description {
+                font-size: 1rem;
                 padding: 0 1rem;
             }
 
             #chess-journey {
-                padding: 40px 5% 60px;
+                padding: 4rem 3% 5rem;
             }
 
-            .milestone-row {
-                flex-direction: column !important;
-                margin: 60px 0;
-                gap: 1.5rem;
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 3rem;
             }
 
             .timeline-line {
-                left: 24px;
+                left: 30px;
                 transform: none;
                 width: 3px;
             }
 
             .timeline-dot {
-                left: 24px;
+                left: 30px;
+                width: 20px;
+                height: 20px;
+            }
+
+            .milestone-row {
+                flex-direction: column !important;
+                margin: 4rem 0;
+                gap: 1.5rem;
+                padding-left: 70px;
             }
 
             .milestone-media {
                 width: 100%;
-                height: 280px;
+                height: 300px;
             }
 
             .milestone-card {
                 width: 100%;
-                padding: 20px;
+                padding: 1.8rem;
             }
 
             .milestone-card h3 {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
 
             .milestone-card p {
-                font-size: 0.95rem;
-            }
-
-            .time-label {
                 font-size: 1rem;
             }
 
@@ -613,49 +695,159 @@
                 gap: 2rem;
             }
 
-            .popup img {
-                max-width: 95%;
-                max-height: 95%;
+            .popup-close {
+                top: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
+            header {
+                padding: 1rem 4%;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+                border: 2px solid white;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .mobile-menu {
+                top: 65px;
+            }
+
+            .mobile-menu a {
+                font-size: 1rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .page-hero {
+                padding: 4rem 1rem 2rem;
+                margin-top: 65px;
+            }
+
             .page-hero h1 {
                 font-size: 2rem;
             }
 
-            .page-hero p {
+            .page-hero .subtitle {
                 font-size: 1rem;
             }
 
             .page-hero .divider {
-                width: 280px;
+                width: 150px;
                 height: 3px;
             }
 
+            .page-hero .description {
+                font-size: 0.95rem;
+                padding: 0;
+            }
+
+            #chess-journey {
+                padding: 3rem 4% 4rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-title::after {
+                width: 80px;
+                height: 3px;
+            }
+
+            .timeline-line {
+                left: 20px;
+                width: 2px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                width: 16px;
+                height: 16px;
+                border: 3px solid white;
+            }
+
+            .milestone-row {
+                margin: 3rem 0;
+                padding-left: 50px;
+                gap: 1rem;
+            }
+
             .milestone-media {
-                height: 220px;
+                height: 240px;
+                border-radius: 12px;
+            }
+
+            .milestone-media::before {
+                font-size: 1rem;
             }
 
             .milestone-card {
-                padding: 15px;
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .milestone-card::before {
+                width: 4px;
+            }
+
+            .time-label {
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
             }
 
             .milestone-card h3 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                margin-bottom: 0.8rem;
             }
 
             .milestone-card p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+
+            .popup img {
+                max-width: 95%;
+                max-height: 95%;
+                border-radius: 10px;
+            }
+
+            .popup-close {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.8rem;
+            }
+
+            .footer-content {
+                gap: 1.5rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
                 font-size: 0.9rem;
+                line-height: 1.8;
             }
 
-            .logo-text {
-                font-size: 1.1rem;
-            }
-
-            .logo img {
-                width: 35px;
-                height: 35px;
+            .footer-bottom {
+                padding-top: 1.5rem;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -673,7 +865,7 @@
                 <li><a href="#" class="active">Chess</a></li>
                 <li><a href="project.html">Projects</a></li>
                 <li><a href="community.html">Community</a></li>
-                <li><a href="achievements.html">Certificates & Achievements</a></li>
+                <li><a href="experience.html">Experience</a></li>
                 <li><a href="./index.html#contact">Contact</a></li>
             </ul>
         </nav>
@@ -691,23 +883,33 @@
             <li><a href="#" class="mobile-link">Chess</a></li>
             <li><a href="project.html" class="mobile-link">Projects</a></li>
             <li><a href="community.html" class="mobile-link">Community</a></li>
-            <li><a href="achievements.html" class="mobile-link">Certificates & Achievements</a></li>
+            <li><a href="experience.html" class="mobile-link">Experience</a></li>
             <li><a href="./index.html#contact" class="mobile-link">Contact</a></li>
         </ul>
     </div>
 
     <!-- Hero Section -->
     <section class="page-hero">
-        <h1>My Chess Journey</h1>
-        <div class="divider"></div>
-        <p>
-The rhythmic click of chess clocks has always felt like home to me. Chess to me has been more than a passion; it has been an environment where I have grown and learned. From a chess player to the club’s president, I have found where I belong and discovered my confidence. Now I know how to improvise when new “moves”, whether on the chessboard or in my life, come unexpectedly.
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
 
-        </p>
+        <div class="hero-content">
+            <h1>My Chess Journey</h1>
+            <p class="subtitle">♟️ The Chess World That I Loved</p>
+            <div class="divider"></div>
+            <p class="description">
+                The rhythmic click of chess clocks has always felt like home to me. Chess to me has been more than a passion; it has been an environment where I have grown and learned. From a chess player to the club's president, I have found where I belong and discovered my confidence. Now I know how to improvise when new "moves", whether on the chessboard or in my life, come unexpectedly.
+            </p>
+        </div>
     </section>
 
     <!-- Timeline Section -->
     <section id="chess-journey">
+        <h2 class="section-title">Timeline of Milestones</h2>
+        
         <div class="timeline-wrap">
             <div class="timeline-line"></div>
             <div class="timeline-dot" id="dot"></div>
@@ -720,8 +922,7 @@ The rhythmic click of chess clocks has always felt like home to me. Chess to me 
                 <div class="milestone-card">
                     <div class="time-label">June 2023</div>
                     <h3>My First Chess Tournament</h3>
-                    <p>
-I was new, nervous, and had no idea what to expect. I learned how it felt to compete for real and how easily one bad move could ruin a game. This was the start of everything I later improved on.                    </p>
+                    <p>I was new, nervous, and had no idea what to expect. I learned how it felt to compete for real and how easily one bad move could ruin a game. This was the start of everything I later improved on.</p>
                 </div>
             </div>
 
@@ -733,8 +934,7 @@ I was new, nervous, and had no idea what to expect. I learned how it felt to com
                 <div class="milestone-card">
                     <div class="time-label">Mar 2024</div>
                     <h3>My Last Chess Tournament</h3>
-                    <p>
-I already had more experience and I understood the game better than before. This event showed me how much I had changed since my first match and it closed the chapter on my time competing in school.                    </p>
+                    <p>I already had more experience and I understood the game better than before. This event showed me how much I had changed since my first match and it closed the chapter on my time competing in school.</p>
                 </div>
             </div>
 
@@ -746,9 +946,7 @@ I already had more experience and I understood the game better than before. This
                 <div class="milestone-card">
                     <div class="time-label">June 2024</div>
                     <h3>Chess Orientation Day</h3>
-                    <p>
-                        The start of a new season and new connections. Meeting teammates and learning our team's rhythm made me excited to keep improving and growing together.
-                    </p>
+                    <p>The start of a new season and new connections. Meeting teammates and learning our team's rhythm made me excited to keep improving and growing together.</p>
                 </div>
             </div>
 
@@ -760,9 +958,7 @@ I already had more experience and I understood the game better than before. This
                 <div class="milestone-card">
                     <div class="time-label">Oct 2024</div>
                     <h3>Chess Nang Khieu First Bonding</h3>
-                    <p>
-                        I was lucky to get to know my teammates beyond the board. My first presentation with the entire club, sharing my chess interests and future prospects with the club.
-                    </p>
+                    <p>I was lucky to get to know my teammates beyond the board. My first presentation with the entire club, sharing my chess interests and future prospects with the club.</p>
                 </div>
             </div>
 
@@ -774,9 +970,7 @@ I already had more experience and I understood the game better than before. This
                 <div class="milestone-card">
                     <div class="time-label">Oct 2024</div>
                     <h3>Board Team Pictures</h3>
-                    <p>
-                        I started to feel part of a large community. Connecting with teammates and building a competitive space for everyone to compete was my dream in a long time.
-                    </p>
+                    <p>I started to feel part of a large community. Connecting with teammates and building a competitive space for everyone to compete was my dream in a long time.</p>
                 </div>
             </div>
 
@@ -913,7 +1107,7 @@ I already had more experience and I understood the game better than before. This
                 <a href="chess.html">Chess</a>
                 <a href="project.html">Projects</a>
                 <a href="community.html">Community</a>
-                <a href="achievements.html">Certificates & Achievements</a>
+                <a href="experience.html">experience</a>
             </div>
             <div class="footer-section">
                 <h3>Connect</h3>
