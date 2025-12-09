@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoi Mai - Community Impact</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 153, 51, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+            padding: 1rem 5%;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 90px;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 153, 51, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 40%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { top: 60%; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { top: 80%; left: 70%; animation-delay: 6s; }
+        .particle:nth-child(5) { top: 30%; left: 50%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { transform: translateY(-30px) translateX(20px); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            font-weight: 600;
+        }
+
+        .page-hero .divider {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 2rem auto;
+            border-radius: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .page-hero .description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Trip Navigation */
+        .trip-navigation {
+            background: #f8f9fa;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .trip-menu {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trip-menu-item {
+            background: white;
+            border: 3px solid #e0e0e0;
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .trip-menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .trip-menu-item.active {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            border-color: #ffd700;
+        }
+
+        /* Trip Content Section */
+        .trip-section {
+            display: none;
+            padding: 6rem 5% 8rem;
+            background: white;
+        }
+
+        .trip-section.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 4rem;
+        }
+
+        /* Story Grid Layout */
+        .story-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .story-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .story-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-block.reverse {
+            direction: rtl;
+        }
+
+        .story-block.reverse > * {
+            direction: ltr;
+        }
+
+        /* Image Gallery in Story Block */
+        .story-images {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .story-images.single {
+            grid-template-columns: 1fr;
+        }
+
+        .story-images.double {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+        }
+
+        .story-images.triple {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
+        }
+
+        .story-img {
+            width: 100%;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .story-images.single .story-img {
+            height: 450px;
+        }
+
+        .story-images.double .story-img {
+            height: 350px;
+        }
+
+        .story-images.triple .story-img {
+            height: 280px;
+        }
+
+        .story-images.triple .story-img:first-child {
+            height: 350px;
+        }
+
+        .story-img::before {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .story-img:hover::before {
+            opacity: 1;
+        }
+
+        .story-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .story-img:hover::after {
+            opacity: 1;
+        }
+
+        .story-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .story-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .story-img:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Story Text */
+        .story-text {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border-left: 6px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffd700;
+            font-size: 1rem;
+            font-weight: 900;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .story-text h3 {
+            font-size: 2rem;
+            color: #1a1a2e;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        .story-text p {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        .story-text .heart-icon {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 153, 51, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 153, 51, 1);
+            transform: rotate(90deg);
+        }
+
+        .popup img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+            object-fit: contain;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .popup.active img {
+            transform: scale(1);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ff9933;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff9933;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1125px) {
+            .page-hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+
+            .story-block {
+                gap: 3rem;
+                margin-bottom: 5rem;
+            }
+
+            .story-text {
+                padding: 2.5rem;
+            }
+
+            .story-text h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 6rem 3% 3rem;
+                margin-top: 70px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .page-hero .description {
+                font-size: 1rem;
+            }
+
+            .trip-navigation {
+                padding: 2rem 3%;
+            }
+
+            .trip-menu {
+                gap: 1rem;
+            }
+
+            .trip-menu-item {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .trip-section {
+                padding: 4rem 3% 5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .story-block {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 4rem;
+            }
+
+            .story-block.reverse {
+                direction: ltr;
+            }
+
+            .story-img {
+                height: 300px;
+            }
+
+            .story-images.single .story-img {
+                height: 350px;
+            }
+
+            .story-images.double .story-img {
+                height: 280px;
+            }
+
+            .story-images.triple .story-img {
+                height: 250px;
+            }
+
+            .story-images.triple .story-img:first-child {
+                height: 300px;
+            }
+
+            .story-text {
+                padding: 2rem;
+            }
+
+            .story-text h3 {
+                font-size: 1.6rem;
+            }
+
+            .story-text p {
+                font-size: 1.05rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 4%;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .page-hero {
+                padding: 4rem 1rem 2rem;
+                margin-top: 65px;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .page-hero .description {
+                font-size: 0.95rem;
+            }
+
+            .trip-menu-item {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .story-block {
+                gap: 1.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .story-img {
+                height: 250px;
+            }
+
+            .story-images.single .story-img {
+                height: 280px;
+            }
+
+            .story-images.double .story-img {
+                height: 220px;
+            }
+
+            .story-images.triple .story-img {
+                height: 200px;
+            }
+
+            .story-images.triple .story-img:first-child {
+                height: 240px;
+            }
+
+            .story-text {
+                padding: 1.5rem;
+            }
+
+            .story-number {
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
+            }
+
+            .story-text h3 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .story-text p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+
+            .popup-close {
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./pictures/profile.jpg" alt="Khoi Mai">
+            <span class="logo-text">Khoi Mai</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chess.html">Chess</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="#" class="active">Community</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html" class="mobile-link">Home</a></li>
+            <li><a href="chess.html" class="mobile-link">Chess</a></li>
+            <li><a href="project.html" class="mobile-link">Projects</a></li>
+            <li><a href="#" class="mobile-link">Community</a></li>
+            <li><a href="experience.html" class="mobile-link">Experience</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <section class="page-hero">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <div class="hero-content">
+            <h1>Community Impact</h1>
+            <p class="subtitle">❤️ Giving Back Through Meaningful Connections</p>
+            <div class="divider"></div>
+            <p class="description">
+                Beyond the classroom and competition, I've found purpose in serving communities that need it most. Through charity trips focused on education and mentorship, I've learned that the greatest joy comes not from what we achieve alone, but from what we share with others.
+            </p>
+        </div>
+    </section>
+
+    <section class="trip-navigation">
+        <div class="trip-menu">
+            <div class="trip-menu-item active" data-trip="universe">✨ Unveiling the Universe</div>
+            <div class="trip-menu-item" data-trip="chessing">♟️ Chessing is Caring</div>
+        </div>
+    </section>
+
+    <section class="trip-section active" id="universe">
+        <h2 class="section-title">Unveiling the Universe</h2>
+        <p class="section-subtitle">Inspiring young minds through the wonders of astronomy</p>
+
+        <div class="story-grid">
+            <div class="story-block">
+                <div class="story-images single">
+                    <div class="story-img" data-img="./pictures/go4.JPG">
+                        <img src="./pictures/go4.JPG" alt="Universe Trip">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 01</span>
+                    <h3>The Journey Begins</h3>
+                    <p>When we first arrived, I could see the curiosity in their eyes. These children had never looked through a telescope before, never traced constellations in the night sky. We came with a simple mission: to open their minds to the vastness of the universe.</p>
+                    <p>Education is about more than facts and figures. It's about igniting wonder, about showing someone that their world extends far beyond what they can see.</p>
+                    <div class="heart-icon">💫</div>
+                </div>
+            </div>
+
+            <div class="story-block reverse">
+                <div class="story-images double">
+                    <div class="story-img" data-img="./pictures/go11.JPG">
+                        <img src="./pictures/go11.JPG" alt="Teaching moment">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go15.jpg">
+                        <img src="./pictures/go15.jpg" alt="Learning together">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 02</span>
+                    <h3>Moments of Wonder</h3>
+                    <p>There's a specific moment I'll never forget: when a young girl looked through the telescope for the first time and saw Jupiter's moons. Her gasp of amazement reminded me why we do this work.</p>
+                    <p>We taught them about stars, planets, and galaxies. But more importantly, we taught them to dream beyond their circumstances, to reach for possibilities they never knew existed.</p>
+                    <div class="heart-icon">🌟</div>
+                </div>
+            </div>
+
+            <div class="story-block">
+                <div class="story-images triple">
+                    <div class="story-img" data-img="./pictures/go19.jpg">
+                        <img src="./pictures/go19.jpg" alt="Group activity">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go27.jpg">
+                        <img src="./pictures/go27.jpg" alt="Hands-on learning">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go28.jpg">
+                        <img src="./pictures/go28.jpg" alt="Smiling faces">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 03</span>
+                    <h3>Building Connections</h3>
+                    <p>As the days went on, we weren't just teachers anymore. We became friends, older siblings, mentors. The children shared their dreams with us, and we shared our stories of how education opened doors for us.</p>
+                    <p>Every child deserves to know that their potential is as limitless as the universe itself. Through simple lessons about the cosmos, we planted seeds of ambition and hope.</p>
+                    <div class="heart-icon">🌠</div>
+                </div>
+            </div>
+
+            <div class="story-block reverse">
+                <div class="story-images single">
+                    <div class="story-img" data-img="./pictures/go25.jpg">
+                        <img src="./pictures/go25.jpg" alt="Final moments">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 04</span>
+                    <h3>Hearts Forever Changed</h3>
+                    <p>On our last day, the children didn't want us to leave. They had prepared drawings of stars and planets, little gifts made with care and love. That's when it hit me: we came to teach, but we were the ones who learned the most valuable lessons.</p>
+                    <p>We learned about resilience, about finding joy in simplicity, about the power of human connection. This trip didn't just change their lives—it fundamentally changed ours.</p>
+                    <div class="heart-icon">❤️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trip-section" id="chessing">
+        <h2 class="section-title">Chessing is Caring</h2>
+        <p class="section-subtitle">Teaching life through 64 squares</p>
+
+        <div class="story-grid">
+            <div class="story-block">
+                <div class="story-images single">
+                    <div class="story-img" data-img="./pictures/go21.jpg">
+                        <img src="./pictures/go21.jpg" alt="Chess setup">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 01</span>
+                    <h3>More Than Just a Game</h3>
+                    <p>Chess has always been my passion, but bringing it to underprivileged communities gave it new meaning. I realized that every chess lesson was actually a life lesson—about patience, strategic thinking, handling loss, and celebrating small victories.</p>
+                    <p>When we set up the boards for the first time, many of the children had never seen a chess set before. Their eagerness to learn reminded me of my own first encounter with the game.</p>
+                    <div class="heart-icon">♟️</div>
+                </div>
+            </div>
+
+            <div class="story-block reverse">
+                <div class="story-images double">
+                    <div class="story-img" data-img="./pictures/go24.jpg">
+                        <img src="./pictures/go24.jpg" alt="Teaching chess">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go27.jpg">
+                        <img src="./pictures/go27.jpg" alt="Chess lesson">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 02</span>
+                    <h3>Every Move Matters</h3>
+                    <p>As we taught the basics—how pieces move, how to think ahead—I watched their confidence grow with each successful move. The smiles on their faces when they won their first game were priceless.</p>
+                    <p>Chess became a metaphor for life: sometimes you have to sacrifice to achieve your goals, sometimes you need to defend, and sometimes you need to take bold risks. Every move on the board became a lesson they could carry beyond the game.</p>
+                    <div class="heart-icon">🎯</div>
+                </div>
+            </div>
+
+            <div class="story-block">
+                <div class="story-images triple">
+                    <div class="story-img" data-img="./pictures/go25.jpg">
+                        <img src="./pictures/go25.jpg" alt="Group photo">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go21.jpg">
+                        <img src="./pictures/go21.jpg" alt="Chess moment">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go24.jpg">
+                        <img src="./pictures/go24.jpg" alt="Teaching">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 03</span>
+                    <h3>The Meaning of Love</h3>
+                    <p>My favorite moment came unexpectedly. After a long day of teaching, the children asked if we could take a picture together. It was such a simple request, but it meant everything to me.</p>
+                    <p>Through teaching, I discovered what these underprivileged children understand about love. They just wanted a picture together—a symbol of connection, of being seen, of mattering to someone. That single gesture taught me more about compassion than any book ever could.</p>
+                    <div class="heart-icon">💝</div>
+                </div>
+            </div>
+
+            <div class="story-block reverse">
+                <div class="story-images double">
+                    <div class="story-img" data-img="./pictures/go27.jpg">
+                        <img src="./pictures/go27.jpg" alt="Chess learning">
+                    </div>
+                    <div class="story-img" data-img="./pictures/go28.jpg">
+                        <img src="./pictures/go28.jpg" alt="Happy moments">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 04</span>
+                    <h3>Lessons We Received</h3>
+                    <p>In teaching chess, we learned as much as we taught. The resilience and joy of these children inspired us deeply. Despite having so little materially, they had an abundance of spirit, gratitude, and determination.</p>
+                    <p>They showed us that happiness doesn't come from what you own, but from the connections you make and the dreams you dare to pursue. These children reminded me why giving back matters, why community service isn't just about helping others—it's about growing together.</p>
+                    <div class="heart-icon">✨</div>
+                </div>
+            </div>
+
+            <div class="story-block">
+                <div class="story-images single">
+                    <div class="story-img" data-img="./pictures/go19.jpg">
+                        <img src="./pictures/go19.jpg" alt="Final farewell">
+                    </div>
+                </div>
+                <div class="story-text">
+                    <span class="story-number">CHAPTER 05</span>
+                    <h3>Forever in Our Hearts</h3>
+                    <p>As we said goodbye, I realized this experience had changed me forever. These children, with their bright eyes and eager minds, had shown me the true power of education, kindness, and human connection.</p>
+                    <p>I left knowing that somewhere, a child who learned chess from us might teach it to someone else. The ripple effect of compassion continues long after we leave. And that's the beauty of community work—you plant seeds that grow in ways you'll never fully see, but you trust they'll bloom.</p>
+                    <div class="heart-icon">🌈</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup" id="popup">
+        <div class="popup-close" id="popupClose">×</div>
+        <img src="" alt="Popup" id="popup-img">
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>High School Student Specialized in Mathematics at VNU-HCM High School for the Gifted</p>
+                <p>Passionate about Computer Science, Chess, and Mathematics</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="chess.html">Chess</a>
+                <a href="project.html">Projects</a>
+                <a href="community.html">Community</a>
+                <a href="experience.html">Experience</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Email: hoangkhhoi1805@gmail.com</p>
+                <p>Location: Ho Chi Minh City, Vietnam</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mai Hoang Khoi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Trip menu switching
+        const tripMenuItems = document.querySelectorAll('.trip-menu-item');
+        const tripSections = document.querySelectorAll('.trip-section');
+
+        tripMenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const tripId = item.dataset.trip;
+                
+                tripMenuItems.forEach(mi => mi.classList.remove('active'));
+                item.classList.add('active');
+                
+                tripSections.forEach(section => section.classList.remove('active'));
+                document.getElementById(tripId).classList.add('active');
+
+                // Reset and observe new story blocks
+                setTimeout(() => {
+                    observeStories();
+                }, 100);
+            });
+        });
+
+        // Scroll reveal for story blocks
+        function observeStories() {
+            const storyBlocks = document.querySelectorAll('.story-block');
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            storyBlocks.forEach(block => {
+                block.classList.remove('visible');
+                observer.observe(block);
+            });
+        }
+
+        observeStories();
+
+        // Popup functionality
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popup-img');
+        const popupClose = document.getElementById('popupClose');
+
+        document.querySelectorAll('.story-img').forEach(img => {
+            img.addEventListener('click', () => {
+                popupImg.src = img.dataset.img;
+                popup.classList.add('active');
+            });
+        });
+
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup || e.target === popupClose) {
+                popup.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
